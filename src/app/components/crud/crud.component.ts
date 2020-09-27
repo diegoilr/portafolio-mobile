@@ -24,4 +24,6 @@ export class CRUDComponent implements OnInit {
     this.id_empresa="";
     this.nombre_empresa="";
   }
+
+
 }
