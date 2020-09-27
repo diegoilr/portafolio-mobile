@@ -25,5 +25,4 @@ export class CRUDComponent implements OnInit {
     this.nombre_empresa="";
   }
 
-
 }
