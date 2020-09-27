@@ -12,6 +12,6 @@ Se irá desarrollando de forma local junto con el API que está hecha en nodejs 
 
 ## API LOCAL
 
-Run `ng test` to execute the unit tests via [API](https://github.com/diegoilr/API-Portafolio).
+Trabajando en conjunto con el desarrollo de esta API en base a NodeJS y ORACLEDB [API](https://github.com/diegoilr/API-Portafolio).
 
 
