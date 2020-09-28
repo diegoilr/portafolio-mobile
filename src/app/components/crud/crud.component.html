@@ -22,7 +22,7 @@
 
 <div class="container mt-5">
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4 col-xs-12 mt-3">
       <form>
         <div class="form-group">
           <input [(ngModel)]="id_empresa" name="id_empresa" placeholder="ID Empresa" type="number" class="form-control">
@@ -33,23 +33,31 @@
         </div>
 
         <button (click)="addEmpresa()" type="submit" class="btn btn-success btn-block"> Guardar Empresa</button>
+        <button (click)="updateEmpresa()" type="submit" class="btn btn-warning btn-block"> Guardar Cambios</button>
+        <button (click)="addEmpresa()" type="submit" class="btn btn-primary btn-block"> Cargar CSV</button>
       </form>
     </div>
 
-    <div class="col-8">
-      <div class="row">
+  <div class="col-8">
+    <div class="row">
 
-        <div *ngFor="let empresa of Empresas" class="col-4">
+      <div *ngFor="let empresa of Empresas" class="col-md-6 col-xs-12 mt-3">
 
-          <div class="card bg-light mb-3">
-            <div class="card-header">{{empresa.id_empresa}}</div>
-            <div class="card-body">
-              <h5 class="card-title">{{empresa.nombre_empresa}}</h5>
-            </div>
+        <div class="card bg-light mb-3">
+          <div class="card-header">ID Empresa: {{empresa.id_empresa}}</div>
+          <div class="card-body">
+            <h5 class="card-title">{{empresa.nombre_empresa}}</h5>
           </div>
-
+          <div class="card-footer">
+            <button type="submit"
+            (click)="getDataEmpresa(empresa.id_empresa,empresa.nombre_empresa)"
+            class="btn btn-warning btn-block">Editar Empresa</button>
+            <button (click)="deleteEmpresa(empresa.id_empresa)" type="submit"  class="btn btn-danger btn-block">Eliminar Empresa</button>
         </div>
+        </div>
+      </div>
     </div>
-
   </div>
+
+
 </div>

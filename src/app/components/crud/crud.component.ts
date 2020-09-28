@@ -12,19 +12,45 @@ export class CRUDComponent implements OnInit {
   constructor(public crudService: EmpresaService) { }
 
   ngOnInit(): void {
-    this.crudService.GetEmpresas().subscribe((res:EmpresaInterface[])=>{
+    this.crudService.GetEmpresas().subscribe((res: EmpresaInterface[]) =>
+    {
       this.Empresas = res;
     })
   }
 
-  id_empresa: string = "''";
+  id_empresa: number = 0;
   nombre_empresa: string = "";
-  Empresas: EmpresaInterface[] =[];
+  Empresas: EmpresaInterface[] = [];
 
   addEmpresa(){
-    console.log(this.id_empresa, this.nombre_empresa);
-    this.id_empresa="";
-    this.nombre_empresa="";
+    this.crudService.InsertEmpresa(this.id_empresa,this.nombre_empresa)
+    .subscribe((res: EmpresaInterface[]) => {
+      this.Empresas = res;
+      this.id_empresa=0;
+      this.nombre_empresa="";
+    })
+  }
+
+  getDataEmpresa(id_empresa, nombre_empresa){
+    this.id_empresa = id_empresa;
+    this.nombre_empresa = nombre_empresa;
+
+  }
+
+  updateEmpresa(){
+    this.crudService.UpdateEmpresa(this.id_empresa,this.nombre_empresa).subscribe((res:EmpresaInterface[])=>{
+      this.Empresas = res;
+      this.id_empresa = 0;
+      this.nombre_empresa = "";
+    })
+
+  }
+
+  deleteEmpresa(id_empresa){
+    this.crudService.DeleteEmpresa(id_empresa).subscribe((res:EmpresaInterface[])=>{
+      this.Empresas = res;
+    })
+
   }
 
 }
