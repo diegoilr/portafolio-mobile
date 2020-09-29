@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UsuarioInterface } from '../models/usuario-interface';
+import { isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +52,37 @@ export class EmpresaService {
 
     return this.http.delete(url).pipe(map(data=>data));
   }
+
+
+  // TO DO: LOGIN
+
+  LogIn(nombre_usuario, password_usuario){
+    const url ="http://localhost:3000/signup"
+
+    return this.http.post(url,
+      {
+        "nombre_usuario": nombre_usuario,
+        "password_ususario": password_usuario
+      }
+      ,{headers: this.headers}).pipe(map(data=>data));
+  }
+
+  // TO DO: SET CURENT USER
+  setCurrentUser(usuario: UsuarioInterface){
+    let usuario_string = JSON.stringify(usuario);
+    localStorage.setItem('usuarioLogeado',usuario_string);
+  }
+
+  // TO DO: GET CURENT USER
+  getCurrentUser(){
+    let userCurrent = localStorage.getItem('usuarioLogeado');
+    if(!isNullOrUndefined(userCurrent)){
+      let user_json=JSON.parse(userCurrent);
+      return user_json;
+    }else{
+      return null;
+    }
+  }
+
+  // TO DO: LOGOUT
 }
