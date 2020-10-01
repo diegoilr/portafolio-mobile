@@ -15,12 +15,12 @@ export class EmpresaService {
     "Content-Type":"application/json"
   })
 
-  // TO DO: GET EMPRESAS
+  // TODO: GET EMPRESAS
   GetEmpresas(){
     const url="http://localhost:3000/getEmpresas";
     return this.http.get(url);
   }
-  // TO DO: INSERT EMPRESAS
+  // TODO: INSERT EMPRESAS
   InsertEmpresa(id_empresa:number,nombre_empresa:string){
     const url="http://localhost:3000/addEmpresa";
     return this.http.post(url,
@@ -32,7 +32,7 @@ export class EmpresaService {
       ).pipe(map(data=>data));
   }
 
-  // TO DO: UPDATE EMPRESAS
+  // TODO: UPDATE EMPRESAS
   UpdateEmpresa(id_empresa:number,nombre_empresa:string){
     const url="http://localhost:3000/updateEmpresa";
     return this.http.put(url,
@@ -46,7 +46,7 @@ export class EmpresaService {
 
 
 
-  // TO DO: DELETE EMPRESAS
+  // TODO: DELETE EMPRESAS
   DeleteEmpresa(id_empresa){
     const url="http://localhost:3000/deleteEmpresa/" + id_empresa;
 
@@ -54,29 +54,27 @@ export class EmpresaService {
   }
 
 
-  // TO DO: LOGIN
+  // TODO: LOGIN
 
   LogIn(nombre_usuario, password_usuario){
     const url ="http://localhost:3000/signup"
 
     return this.http.post(url,
-      {
-        "nombre_usuario": nombre_usuario,
-        "password_ususario": password_usuario
-      }
-      ,{headers: this.headers}).pipe(map(data=>data));
+      {nombre_usuario, password_usuario},
+      {headers: this.headers})
+      .pipe(map( data => data));
   }
 
-  // TO DO: SET CURENT USER
+  // TODO: SET CURENT USER
   setCurrentUser(usuario: UsuarioInterface){
     let usuario_string = JSON.stringify(usuario);
     localStorage.setItem('usuarioLogeado',usuario_string);
   }
 
-  // TO DO: GET CURENT USER
+  // TODO: GET CURENT USER
   getCurrentUser(){
     let userCurrent = localStorage.getItem('usuarioLogeado');
-    if(!isNullOrUndefined(userCurrent)){
+    if(!userCurrent){
       let user_json=JSON.parse(userCurrent);
       return user_json;
     }else{
@@ -84,5 +82,5 @@ export class EmpresaService {
     }
   }
 
-  // TO DO: LOGOUT
+  // TODO: LOGOUT
 }
