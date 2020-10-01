@@ -53,4 +53,9 @@ export class CRUDComponent implements OnInit {
 
   }
 
+
+  cerrarSesion(){
+    this.crudService.logout();
+  }
+
 }

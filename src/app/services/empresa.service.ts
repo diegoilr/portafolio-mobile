@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UsuarioInterface } from '../models/usuario-interface';
-import { isNullOrUndefined } from 'util';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type":"application/json"
@@ -74,7 +74,7 @@ export class EmpresaService {
   // TODO: GET CURENT USER
   getCurrentUser(){
     let userCurrent = localStorage.getItem('usuarioLogeado');
-    if(!userCurrent){
+    if(userCurrent != null){
       let user_json=JSON.parse(userCurrent);
       return user_json;
     }else{
@@ -83,4 +83,9 @@ export class EmpresaService {
   }
 
   // TODO: LOGOUT
+
+  logout(){
+    localStorage.removeItem('usuarioLogeado')
+    this.router.navigate(['/'])
+  }
 }

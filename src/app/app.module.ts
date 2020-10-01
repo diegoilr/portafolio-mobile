@@ -8,8 +8,10 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { FormsModule } from '@angular/forms';
-
 import { HttpClientModule } from '@angular/common/http';
+
+import { EmpresaService } from './services/empresa.service';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

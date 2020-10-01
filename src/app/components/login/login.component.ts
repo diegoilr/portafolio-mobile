@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
-
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,7 +11,7 @@ import { UsuarioInterface } from '../../models/usuario-interface';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: EmpresaService) { }
+  constructor(public auth: EmpresaService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       if(res['msg']){
         let DataUser: UsuarioInterface = res['Datauser'];
         this.auth.setCurrentUser(DataUser);
-
+        this.router.navigate(['/crud']);
       }else {
         console.log('Credenciales Incorrectas');
       };

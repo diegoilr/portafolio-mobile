@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CRUDComponent } from './components/crud/crud.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from "../app/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -11,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'crud',
-    component: CRUDComponent
+    component: CRUDComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
