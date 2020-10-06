@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { EmpresaService } from './services/empresa.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { Page404Component } from './components/page404/page404.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { EmpresaService } from './services/empresa.service';
     AppComponent,
     CRUDComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    RegisterComponent,
+    Page404Component,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
