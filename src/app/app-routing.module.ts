@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from "../app/guards/auth.guard";
 import { RegisterComponent } from './components/register/register.component';
 import { Page404Component } from './components/page404/page404.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -26,9 +27,13 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
     path: '**',
     component: Page404Component
-  }
+  },
 
 ];
 

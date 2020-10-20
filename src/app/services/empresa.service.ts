@@ -86,6 +86,27 @@ export class EmpresaService {
 
   logout(){
     localStorage.removeItem('usuarioLogeado')
-    this.router.navigate(['/'])
+    this.router.navigate(['/home'])
   }
+
+  //TODO: REGISTRO DE USUARIO
+  InsertUsuario(rut_cliente: number, nombre_cliente: string, apellido_cliente: string, tel_cliente: number, nombre_usuario: string, password_usuario: string, empresa_id_empresa: number){
+    const url="http://localhost:3000/addUser";
+    return this.http.post(url,
+      {
+        "rut_cliente": rut_cliente,
+        "nombre_cliente": nombre_cliente,
+        "apellido_cliente": apellido_cliente,
+        "tel_cliente": tel_cliente,
+        "nombre_usuario": nombre_usuario,
+        "password_usuario": password_usuario,
+        "empresa_id_empresa": empresa_id_empresa
+      },
+      {headers:this.headers}
+      ).pipe(map(data=>data));
+
+  }
+
+
+
 }

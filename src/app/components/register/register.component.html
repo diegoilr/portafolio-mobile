@@ -1,1 +1,38 @@
-<p>register works!</p>
+<div class="container h-100 mt-5 mb-5">
+  <div class="row h-100 justify-content-center align-items-center">
+    <img src="https://cdn.svgporn.com/logos/evergreen-icon.svg" alt="" width="80px">
+    <form class="col-12">
+      <div class="form-group">
+        <label>Rut</label>
+        <input [(ngModel)]="rut_cliente"  name="rut_cliente" type="number" class="form-control" placeholder="12345678-9">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Nombre</label>
+        <input [(ngModel)]="nombre_cliente" name="nombre_cliente" type="text" class="form-control" placeholder="Ej: Manuel">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Apellido</label>
+        <input [(ngModel)]="apellido_cliente" name="apellido_cliente" type="text" class="form-control" placeholder="Ej: Zapata">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Teléfono</label>
+        <input [(ngModel)]="tel_cliente" name="tel_cliente" type="text" class="form-control" placeholder="Ej: 9 12345678">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Nombre de Usuario (se usará para Iniciar Sesión)</label>
+        <input [(ngModel)]="nombre_usuario" name="nombre_usuario" type="text" class="form-control" placeholder="Ej: Usuario...">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Contraseña</label>
+        <input [(ngModel)]="password_usuario" name="password_usuario" type="password" class="form-control" placeholder="Contraseña...">
+      </div>
+      <div class="input-group">
+
+        <select class="custom-select" [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa">
+          <option *ngFor="let empresa of Empresas" [value]="empresa.id_empresa">{{empresa.nombre_empresa}}</option>
+        </select>
+      </div>
+      <button (click)="addUsuario()" type="submit" class="mb-5 btn btn-success mt-5">Registrarme</button>
+    </form>
+  </div>
+</div>

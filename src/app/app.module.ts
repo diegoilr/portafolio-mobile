@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { Page404Component } from './components/page404/page404.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FooterComponent } from './components/footer/footer.component';
     NavbarComponent,
     RegisterComponent,
     Page404Component,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
