@@ -1,1 +1,62 @@
-<p>dashboard works!</p>
+<div class="container">
+  <div class="row mt-2">
+    <h2>Bienvenido, {{consultarNombreUsuario()}} ¿Qué deseas hacer?</h2>
+  </div>
+
+  <!-- Button trigger modal -->
+  <div class="row">
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#agregarAccidente">
+      Agregar Accidente
+    </button>
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="agregarAccidente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agrega un Accodente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="col-12">
+          <div class="form-group">
+            <label>ID Accidente</label>
+            <input [(ngModel)]="id_accidente" type="number" class="form-control" name="id_accidente">
+          </div>
+
+          <div class="form-group">
+            <label>Descripción del Accidente</label>
+            <textarea [(ngModel)]="descripcion_acc" class="form-control" rows="3" name="descripcion_acc"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Fecha del Accidente</label>
+            <input [(ngModel)]="fecha_accidente" type="date" class="form-control" name="fecha_accidente">
+          </div>
+          <div class="form-group">
+            <label>Rut Cliente</label>
+            <input [(ngModel)]="cliente_rut_cliente" type="text" class="form-control" name="cliente_rut_cliente" placeholder="{{consultarRutUsuario()}}" disabled>
+          </div>
+          <div class="form-group">
+            <label>Nombre de usuario del cliente</label>
+            <input [(ngModel)]="cliente_nombre_usuario" type="text" class="form-control" name="cliente_nombre_usuario" placeholder="{{consultarNombreCliente()}}" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Guardar Accidente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-3">
+  <p>Listado de mis Accidentes</p>
+</div>
+
+</div>

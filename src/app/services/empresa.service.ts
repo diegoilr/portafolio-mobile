@@ -107,6 +107,21 @@ export class EmpresaService {
 
   }
 
+  // TODO: addACCIDENTE
+
+  insertAccidente(id_accidente: number, descripcion_acc: string, fecha_accidente: Date, cliente_rut_cliente: number, cliente_nombre_usuario: string){
+    const url ="http://localhost:3000/addAccidente";
+    return this.http.post(url,{
+      "id_accidente" : id_accidente,
+      "descripcion_acc" : descripcion_acc,
+      "fecha_accidente" : fecha_accidente,
+      "cliente_rut_cliente" : cliente_rut_cliente,
+      "cliente_nombre_usuario" : cliente_nombre_usuario,
+    },
+    {headers:this.headers}
+    ).pipe(map(data=>data));
+  }
+
 
 
 }
