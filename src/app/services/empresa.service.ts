@@ -3,13 +3,20 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UsuarioInterface } from '../models/usuario-interface';
 import { Router } from "@angular/router";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
 
+  private _refresh$ = new Subject<void>();
+
   constructor(private http: HttpClient, public router: Router) { }
+
+  get refresh$(){
+    return this._refresh$;
+  }
 
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type":"application/json"
@@ -122,6 +129,12 @@ export class EmpresaService {
     ).pipe(map(data=>data));
   }
 
+
+  //TODO: gerAccidente por nombre de Usuario
+  GetAccidentesByUser(cliente_nombre_usuario){
+    const url="http://localhost:3000/getAccidente/" + cliente_nombre_usuario;
+    return this.http.get(url);
+  }
 
 
 }

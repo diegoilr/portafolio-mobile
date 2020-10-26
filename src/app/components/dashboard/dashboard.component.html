@@ -8,6 +8,9 @@
     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#agregarAccidente">
       Agregar Accidente
     </button>
+    <button type="button" class="btn btn-success" data-toggle="modal" (click)="listarAccidente()">
+      Accidente
+    </button>
   </div>
 
 <!-- Modal -->
@@ -15,7 +18,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agrega un Accodente</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Agrega un Accidente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,7 +51,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Guardar Accidente</button>
+        <button (click)="addAccidente()" type="submit" class="btn btn-success">Guardar Accidente</button>
       </div>
     </div>
   </div>
@@ -57,6 +60,22 @@
 
 <div class="container mt-3">
   <p>Listado de mis Accidentes</p>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Descipción</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let accidente of Accidentes">
+        <th scope="row">{{accidente.id_accidente}}</th>
+        <td>{{accidente.descripcion_acc}}</td>
+        <td>{{accidente.fecha_accidente | date}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 </div>

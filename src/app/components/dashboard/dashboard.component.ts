@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccidenteInterface } from '../../models/accidente-interface';
 import { EmpresaService } from '../../services/empresa.service';
 
@@ -10,9 +11,12 @@ import { EmpresaService } from '../../services/empresa.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public crudService: EmpresaService) { }
+  constructor(public crudService: EmpresaService, private router: Router) { }
 
   ngOnInit(): void {
+    this.crudService.GetAccidentesByUser(this.consultarNombreCliente()).subscribe((res: AccidenteInterface[])=>{
+      this.Accidentes=res;
+    })
   }
 
   id_accidente: number;
@@ -25,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   consultarNombreUsuario(){
     const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
-    return dataUsuario.nombre_cliente;
+    return dataUsuario.nombre_usuario;
   }
 
   consultarRutUsuario(){
@@ -39,7 +43,14 @@ export class DashboardComponent implements OnInit {
   }
 
   addAccidente(){
+    this.crudService.insertAccidente(this.id_accidente, this.descripcion_acc, this.fecha_accidente, this.consultarRutUsuario(), this.consultarNombreUsuario()).subscribe((res:AccidenteInterface)=>{
+    })
+  }
 
+  listarAccidente(){
+    this.crudService.GetAccidentesByUser(this.consultarNombreUsuario()).subscribe((res:AccidenteInterface[])=>{
+      this.Accidentes = res;
+    })
   }
 
 }
