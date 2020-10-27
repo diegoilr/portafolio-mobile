@@ -29,12 +29,15 @@ export class LoginComponent implements OnInit {
       if(res['msg']){
         let DataUser: UsuarioInterface = res['Datauser'];
         this.auth.setCurrentUser(DataUser);
-        this.router.navigate(['/crud']);
+        this.router.navigate(['/dashboard']).then(() => {
+          window.location.reload();
+        });
+
       }else {
         console.log('Credenciales Incorrectas');
       };
-
     });
+
   };
 
 }

@@ -14,9 +14,7 @@ export class DashboardComponent implements OnInit {
   constructor(public crudService: EmpresaService, private router: Router) { }
 
   ngOnInit(): void {
-    this.crudService.GetAccidentesByUser(this.consultarNombreCliente()).subscribe((res: AccidenteInterface[])=>{
-      this.Accidentes=res;
-    })
+
   }
 
   id_accidente: number;
@@ -44,6 +42,7 @@ export class DashboardComponent implements OnInit {
 
   addAccidente(){
     this.crudService.insertAccidente(this.id_accidente, this.descripcion_acc, this.fecha_accidente, this.consultarRutUsuario(), this.consultarNombreUsuario()).subscribe((res:AccidenteInterface)=>{
+      window.location.reload();
     })
   }
 

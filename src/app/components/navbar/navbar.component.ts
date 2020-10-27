@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: EmpresaService) { }
+  constructor(private auth: EmpresaService, private router: Router) { }
 
   public app_name = "No Más Accidentes";
   public isLogged: boolean = false;
@@ -20,6 +21,11 @@ export class NavbarComponent implements OnInit {
 
   cerrarSesion(){
     this.auth.logout();
+    this.router.navigate(['/'])
+  .then(() => {
+    window.location.reload();
+  });
+
   }
 
 
