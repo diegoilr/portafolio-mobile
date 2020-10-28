@@ -116,10 +116,9 @@ export class EmpresaService {
 
   // TODO: addACCIDENTE
 
-  insertAccidente(id_accidente: number, descripcion_acc: string, fecha_accidente: Date, cliente_rut_cliente: number, cliente_nombre_usuario: string){
+  insertAccidente(descripcion_acc: string, fecha_accidente: Date, cliente_rut_cliente: number, cliente_nombre_usuario: string){
     const url ="http://localhost:3000/addAccidente";
     return this.http.post(url,{
-      "id_accidente" : id_accidente,
       "descripcion_acc" : descripcion_acc,
       "fecha_accidente" : fecha_accidente,
       "cliente_rut_cliente" : cliente_rut_cliente,
@@ -133,6 +132,17 @@ export class EmpresaService {
   //TODO: gerAccidente por nombre de Usuario
   GetAccidentesByUser(cliente_nombre_usuario){
     const url="http://localhost:3000/getAccidente/" + cliente_nombre_usuario;
+    return this.http.get(url);
+  }
+
+  getAccidentes(){
+    const url="http://localhost:3000/getAccidentes";
+    return this.http.get(url);
+  }
+
+
+  getUsers(){
+    const url="http://localhost:3000/getUsers";
     return this.http.get(url);
   }
 

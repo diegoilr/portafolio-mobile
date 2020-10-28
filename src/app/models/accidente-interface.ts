@@ -1,5 +1,4 @@
 export interface AccidenteInterface {
-  id_accidente: number,
   descripcion_acc: string,
   fecha_accidente: Date,
   cliente_rut_cliente: number,

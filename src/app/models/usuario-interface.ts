@@ -6,5 +6,6 @@ export interface UsuarioInterface {
   nombre_usuario: string,
   password_usuario: string,
   empresa_id_empresa: string,
+  tipo_usuario: number
 
 }
