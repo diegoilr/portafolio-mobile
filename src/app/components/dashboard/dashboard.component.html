@@ -100,3 +100,31 @@
 <div class="container">
   <button class="btn" (click)="listarUsuarios()">BTN</button>
 </div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">RUT</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">ID Empresa</th>
+        <th scope="col">Tipo Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of Usuarios">
+        <th scope="row">{{usuario.rut_cliente}}</th>
+        <td>{{usuario.nombre_cliente}}</td>
+        <td>{{usuario.apellido_cliente}}</td>
+        <td>{{usuario.tel_cliente}}</td>
+        <td>{{usuario.nombre_usuario}}</td>
+        <td>{{usuario.empresa_id_empresa}}</td>
+        <td>{{usuario.tipo_usuario}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

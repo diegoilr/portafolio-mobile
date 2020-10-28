@@ -32,13 +32,6 @@ export class DashboardComponent implements OnInit {
   nombre_empresa: string;
   public isAdmin: boolean = false;
   public isEmpleado: boolean = false;
-  rut_cliente:number;
-  nombre_cliente: string;
-  apellido_cliente: string;
-  tel_cliente: number;
-  nombre_usuario: string;
-  empresa_id_empresa: number;
-  tipo_usuario: number;
 
 
   consultarNombreUsuario(){
@@ -83,15 +76,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  consultarEmpresa(){
-    this.crudService.GetEmpresas().subscribe((res:EmpresaInterface[])=>{
-      this.Empresas = res;
-    })
-  }
-
   listarAccidentes(){
     this.crudService.getAccidentes().subscribe((res:AccidenteInterface[])=>{
       this.Accidentes2 = res;
+      console.log(this.Accidentes2)
     })
   }
 
