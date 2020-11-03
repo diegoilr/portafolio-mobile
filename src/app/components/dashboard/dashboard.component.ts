@@ -5,6 +5,8 @@ import { EmpresaInterface } from 'src/app/models/empresa-interface';
 import { AccidenteInterface } from '../../models/accidente-interface';
 import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
+import { Identifiers } from '@angular/compiler';
+import { CapacitacionInterface } from '../../models/capacitacion-interface';
 
 
 @Component({
@@ -29,10 +31,21 @@ export class DashboardComponent implements OnInit {
   Accidentes2: AccidenteInterface[];
   Usuarios: UsuarioInterface[];
   Empresas: EmpresaInterface[];
+  Capacitacion: CapacitacionInterface[];
   nombre_empresa: string;
   public isAdmin: boolean = false;
   public isEmpleado: boolean = false;
+  rut_cliente: number;
+  nombre_cliente: string;
+  apellido_cliente: string;
+  tel_cliente: number;
+  nombre_usuario: string;
+  empresa_id_empresa: number;
+  tipo_usuario: number;
 
+  // Capacitacion
+  fecha_visita: Date;
+  desc_capacitacion: string;
 
   consultarNombreUsuario(){
     const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
@@ -54,6 +67,11 @@ export class DashboardComponent implements OnInit {
     console.log(dataUsuario)
     return dataUsuario.tipo_usuario;
 
+  }
+
+  consultarIdEmpresa(){
+    const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
+    return dataUsuario.empresa_id_empresa;
   }
 
   checkAdmin():void{
@@ -87,6 +105,30 @@ export class DashboardComponent implements OnInit {
     this.crudService.getUsers().subscribe((res:UsuarioInterface[])=>{
       this.Usuarios = res;
       console.log(this.Usuarios);
+    })
+  }
+
+  getDataUser(rut_cliente, nombre_cliente, apellido_cliente, tel_cliente, nombre_usuario, empresa_id_empresa, tipo_usuario){
+    this.rut_cliente = rut_cliente;
+    this.nombre_cliente = nombre_cliente;
+    this.apellido_cliente = apellido_cliente;
+    this.tel_cliente = tel_cliente;
+    this.nombre_usuario = nombre_usuario;
+    this.empresa_id_empresa = empresa_id_empresa;
+    this.tipo_usuario = tipo_usuario;
+  }
+
+  updateUser(){
+    this.crudService.updateUser(this.rut_cliente, this.nombre_cliente, this.apellido_cliente, this.tel_cliente, this.nombre_usuario, this.empresa_id_empresa, this.tipo_usuario).subscribe((res:UsuarioInterface[])=>{
+      this.Usuarios = res;
+      window.location.reload();
+    })
+  }
+
+  addCapacitacion(){
+    this.crudService.insertCapacitacion(this.fecha_visita, this.desc_capacitacion, this.consultarIdEmpresa(), this.consultarNombreUsuario(), this.consultarRutUsuario() ).subscribe((res:CapacitacionInterface[])=>{
+      this.Capacitacion = res;
+      window.location.reload();
     })
   }
 

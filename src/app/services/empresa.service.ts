@@ -146,5 +146,39 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
+  updateUser(rut_cliente: number, nombre_cliente: string, apellido_cliente: string, tel_cliente: number, nombre_usuario: string, empresa_id_empresa: number, tipo_usuario: number){
+    const url="http://localhost:3000/updateUser";
+    return this.http.put(url,
+      {
+        "rut_cliente": rut_cliente,
+        "nombre_cliente": nombre_cliente,
+        "apellido_cliente": apellido_cliente,
+        "tel_cliente": tel_cliente,
+        "nombre_usuario": nombre_usuario,
+        "empresa_id_empresa": empresa_id_empresa,
+        "tipo_usuario": tipo_usuario,
+      },
+      {headers:this.headers}
+      ).pipe(map(data=>data));
+
+  }
+
+
+
+  // CAPACITACION
+
+  insertCapacitacion(fecha_visita: Date, desc_capacitacion: string, empresa_id_empresa: number, cliente_nombre_usuario: string, cliente_rut_cliente: number){
+    const url ="http://localhost:3000/addCapacitacion";
+    return this.http.post(url,{
+      "fecha_visita" : fecha_visita,
+      "desc_capacitacion" : desc_capacitacion,
+      "empresa_id_empresa" : empresa_id_empresa,
+      "cliente_nombre_usuario" : cliente_nombre_usuario,
+      "cliente_rut_cliente" : cliente_rut_cliente
+    },
+    {headers:this.headers}
+    ).pipe(map(data=>data));
+
+  }
 
 }
