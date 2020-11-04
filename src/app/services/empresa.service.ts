@@ -181,4 +181,14 @@ export class EmpresaService {
 
   }
 
+  getCapacitaciones(){
+    const url="http://localhost:3000/getCapacitaciones";
+    return this.http.get(url);
+  }
+
+  getCapacitacionesByUser(cliente_nombre_usuario){
+    const url="http://localhost:3000/getCapacitacion/" + cliente_nombre_usuario;
+    return this.http.get(url);
+  }
+
 }

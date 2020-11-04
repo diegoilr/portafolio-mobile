@@ -7,6 +7,9 @@ import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
 import { Identifiers } from '@angular/compiler';
 import { CapacitacionInterface } from '../../models/capacitacion-interface';
+import { CapacitacionesInterface } from '../../models/capacitaciones-interface';
+import { of } from 'rxjs';
+import { AccidentesInterface } from 'src/app/models/accidentes-interface';
 
 
 @Component({
@@ -27,13 +30,16 @@ export class DashboardComponent implements OnInit {
   fecha_accidente: Date;
   cliente_rut_cliente: number;
   cliente_nombre_usuario: string;
-  Accidentes: AccidenteInterface[];
+  Accidentes: AccidentesInterface[];
   Accidentes2: AccidenteInterface[];
   Usuarios: UsuarioInterface[];
   Empresas: EmpresaInterface[];
   Capacitacion: CapacitacionInterface[];
+  Capacitaciones: CapacitacionesInterface[];
+  Capacitaciones2: CapacitacionesInterface[];
   nombre_empresa: string;
   public isAdmin: boolean = false;
+  public isProfesional: boolean = false;
   public isEmpleado: boolean = false;
   rut_cliente: number;
   nombre_cliente: string;
@@ -79,8 +85,13 @@ export class DashboardComponent implements OnInit {
       this.isAdmin = false;
     } else if (this.consultarTipoUsuario() === 2) {
       this.isAdmin = true;
+    } else if(this.consultarTipoUsuario() === 3){
+      this.isProfesional = true;
+    } else {
+      this.isProfesional = false;
     }
   }
+
 
   addAccidente(){
     this.crudService.insertAccidente(this.descripcion_acc, this.fecha_accidente, this.consultarRutUsuario(), this.consultarNombreUsuario()).subscribe((res:AccidenteInterface)=>{
@@ -89,15 +100,14 @@ export class DashboardComponent implements OnInit {
   }
 
   listarAccidente(){
-    this.crudService.GetAccidentesByUser(this.consultarNombreUsuario()).subscribe((res:AccidenteInterface[])=>{
+    this.crudService.GetAccidentesByUser(this.consultarNombreUsuario()).subscribe((res:AccidentesInterface[])=>{
       this.Accidentes = res;
     })
   }
 
   listarAccidentes(){
-    this.crudService.getAccidentes().subscribe((res:AccidenteInterface[])=>{
-      this.Accidentes2 = res;
-      console.log(this.Accidentes2)
+    this.crudService.getAccidentes().subscribe((res:AccidentesInterface[])=>{
+      this.Accidentes = res;
     })
   }
 
@@ -129,6 +139,19 @@ export class DashboardComponent implements OnInit {
     this.crudService.insertCapacitacion(this.fecha_visita, this.desc_capacitacion, this.consultarIdEmpresa(), this.consultarNombreUsuario(), this.consultarRutUsuario() ).subscribe((res:CapacitacionInterface[])=>{
       this.Capacitacion = res;
       window.location.reload();
+    })
+  }
+
+  listarCapacitaciones(){
+    this.crudService.getCapacitaciones().subscribe((res:CapacitacionesInterface[])=>{
+      this.Capacitaciones = res;
+    })
+  }
+
+  listarCapacitacion(){
+    this.crudService.getCapacitacionesByUser(this.consultarNombreUsuario()).subscribe((res:CapacitacionesInterface[])=>{
+      this.Capacitaciones2 = res;
+      console.log(this.Capacitaciones2);
     })
   }
 
