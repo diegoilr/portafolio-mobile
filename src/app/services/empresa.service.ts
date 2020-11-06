@@ -114,6 +114,36 @@ export class EmpresaService {
 
   }
 
+  InsertProfesional(rut_profesional: number, nombre_profesional: string, apellido_profesional: string, tel_profesional: number, usuario_profesional: string){
+    const url="http://localhost:3000/addProfesional";
+    return this.http.post(url,
+      {
+        "rut_profesional": rut_profesional,
+        "nombre_profesional": nombre_profesional,
+        "apellido_profesional": apellido_profesional,
+        "tel_profesional": tel_profesional,
+        "usuario_profesional": usuario_profesional
+      },
+      {headers:this.headers}
+      ).pipe(map(data=>data));
+  }
+
+  DeleteUser(rut_cliente){
+    const url="http://localhost:3000/deleteUser/" + rut_cliente;
+
+    return this.http.delete(url).pipe(map(data=>data));
+  }
+
+  updatePro(rut_cliente){
+    const url="http://localhost:3000/updatePro/" + rut_cliente;
+    return this.http.put(url,
+      {
+        "rut_cliente": rut_cliente,
+      },
+      {headers:this.headers}
+      ).pipe(map(data=>data));
+  }
+
   // TODO: addACCIDENTE
 
   insertAccidente(descripcion_acc: string, fecha_accidente: Date, cliente_rut_cliente: number, cliente_nombre_usuario: string){
@@ -143,6 +173,11 @@ export class EmpresaService {
 
   getUsers(){
     const url="http://localhost:3000/getUsers";
+    return this.http.get(url);
+  }
+
+  getProfesionales(){
+    const url="http://localhost:3000/getProfesionales";
     return this.http.get(url);
   }
 
@@ -191,4 +226,20 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
+  updateCapacitacion(id_capacitacion: number, fecha_visita: Date, desc_capacitacion: string, profesional_rut_profesional: number, empresa_id_empresa: number, cliente_nombre_usuario: string, cliente_rut_cliente: number){
+    const url="http://localhost:3000/updateCapacitacion";
+    return this.http.put(url,
+      {
+        "id_capacitacion": id_capacitacion,
+        "fecha_visita": fecha_visita,
+        "desc_capacitacion": desc_capacitacion,
+        "profesional_rut_profesional": profesional_rut_profesional,
+        "empresa_id_empresa": empresa_id_empresa,
+        "cliente_nombre_usuario": cliente_nombre_usuario,
+        "cliente_rut_cliente": cliente_rut_cliente
+      },
+      {headers:this.headers}
+      ).pipe(map(data=>data));
+
+  }
 }

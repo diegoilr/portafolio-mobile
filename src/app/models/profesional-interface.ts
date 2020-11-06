@@ -1,10 +1,11 @@
 export interface ProfesionalInterface {
-  rut_profesional: number,
-  nombre_profesional: string,
-  apellido_profesional: string,
-  tel_profesional: number,
-  usuario_profesional: string,
-  password_profesional: string,
-  tipo_usuario: number,
+  rut_cliente: number,
+  nombre_cliente: string,
+  apellido_cliente: string,
+  tel_cliente: number,
+  nombre_usuario: string,
+  password_usuario: string,
+  empresa_id_empresa: string,
+  tipo_usuario: number
 
 }

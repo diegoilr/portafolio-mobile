@@ -5,5 +5,5 @@ export interface CapacitacionesInterface {
   profesional_rut_profesional: number,
   empresa_id_empresa: number,
   cliente_nombre_usuario: number,
-  client_rut_cliente: number
+  cliente_rut_cliente: number
 }

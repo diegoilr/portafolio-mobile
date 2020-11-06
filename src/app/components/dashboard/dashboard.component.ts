@@ -10,6 +10,7 @@ import { CapacitacionInterface } from '../../models/capacitacion-interface';
 import { CapacitacionesInterface } from '../../models/capacitaciones-interface';
 import { of } from 'rxjs';
 import { AccidentesInterface } from 'src/app/models/accidentes-interface';
+import { ProfesionalInterface } from '../../models/profesional-interface';
 
 
 @Component({
@@ -23,9 +24,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.checkAdmin();
+
   }
 
   id_accidente: number;
+  id_capacitacion: number;
   descripcion_acc: string;
   fecha_accidente: Date;
   cliente_rut_cliente: number;
@@ -33,6 +36,7 @@ export class DashboardComponent implements OnInit {
   Accidentes: AccidentesInterface[];
   Accidentes2: AccidenteInterface[];
   Usuarios: UsuarioInterface[];
+  Profesionales: ProfesionalInterface[];
   Empresas: EmpresaInterface[];
   Capacitacion: CapacitacionInterface[];
   Capacitaciones: CapacitacionesInterface[];
@@ -46,8 +50,10 @@ export class DashboardComponent implements OnInit {
   apellido_cliente: string;
   tel_cliente: number;
   nombre_usuario: string;
+  password_profesional: string;
   empresa_id_empresa: number;
   tipo_usuario: number;
+  profesional_rut_profesional: number;
 
   // Capacitacion
   fecha_visita: Date;
@@ -73,6 +79,12 @@ export class DashboardComponent implements OnInit {
     console.log(dataUsuario)
     return dataUsuario.tipo_usuario;
 
+  }
+
+  consultarPassword(){
+    const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
+    console.log(dataUsuario)
+    return dataUsuario.password_usuario;
   }
 
   consultarIdEmpresa(){
@@ -114,7 +126,12 @@ export class DashboardComponent implements OnInit {
   listarUsuarios(){
     this.crudService.getUsers().subscribe((res:UsuarioInterface[])=>{
       this.Usuarios = res;
-      console.log(this.Usuarios);
+    })
+  }
+
+  listarProfesionales(){
+    this.crudService.getProfesionales().subscribe((res:ProfesionalInterface[])=>{
+      this.Profesionales = res;
     })
   }
 
@@ -126,6 +143,15 @@ export class DashboardComponent implements OnInit {
     this.nombre_usuario = nombre_usuario;
     this.empresa_id_empresa = empresa_id_empresa;
     this.tipo_usuario = tipo_usuario;
+  }
+
+  getDataCapacitacion(id_capacitacion, fecha_visita, desc_capacitacion, empresa_id_empresa, cliente_nombre_usuario, cliente_rut_cliente){
+    this.id_capacitacion =  id_capacitacion;
+    this.fecha_visita = fecha_visita;
+    this.desc_capacitacion = desc_capacitacion;
+    this.empresa_id_empresa = empresa_id_empresa;
+    this.cliente_nombre_usuario = cliente_nombre_usuario;
+    this.cliente_rut_cliente = cliente_rut_cliente;
   }
 
   updateUser(){
@@ -152,6 +178,33 @@ export class DashboardComponent implements OnInit {
     this.crudService.getCapacitacionesByUser(this.consultarNombreUsuario()).subscribe((res:CapacitacionesInterface[])=>{
       this.Capacitaciones2 = res;
       console.log(this.Capacitaciones2);
+    })
+  }
+
+  updateCapacitacion(){
+    this.crudService.updateCapacitacion(this.id_capacitacion, this.fecha_visita, this.desc_capacitacion, this.profesional_rut_profesional, this.empresa_id_empresa, this.cliente_nombre_usuario, this.cliente_rut_cliente).subscribe((res:CapacitacionesInterface[])=>{
+      this.Capacitaciones2 = res;
+      console.log(res);
+    })
+  }
+
+  addProfesional(){
+    this.crudService.InsertProfesional(this.rut_cliente, this.nombre_cliente, this.apellido_cliente, this.tel_cliente, this.nombre_usuario).subscribe((res:ProfesionalInterface[])=>{
+      this.Profesionales = res;
+      window.location.reload();
+    })
+  }
+
+  deleteUser(rut_cliente){
+    this.crudService.DeleteUser(rut_cliente).subscribe((res:UsuarioInterface[])=>{
+      this.Usuarios = res;
+      window.location.reload();
+    })
+  }
+
+  updatePro(rut_cliente){
+    this.crudService.updatePro(this.rut_cliente).subscribe((res:UsuarioInterface[])=>{
+      this.Usuarios = res;
     })
   }
 
