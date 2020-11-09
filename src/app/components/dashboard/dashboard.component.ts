@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
   updateCapacitacion(){
     this.crudService.updateCapacitacion(this.id_capacitacion, this.fecha_visita, this.desc_capacitacion, this.profesional_rut_profesional, this.empresa_id_empresa, this.cliente_nombre_usuario, this.cliente_rut_cliente).subscribe((res:CapacitacionesInterface[])=>{
       this.Capacitaciones2 = res;
-      console.log(res);
+      window.location.reload();
     })
   }
 
