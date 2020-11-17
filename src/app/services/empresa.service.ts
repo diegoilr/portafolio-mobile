@@ -165,6 +165,12 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
+  //TODO: gerAccidente por profesional
+  GetAccidentesByProfesional(profesional_rut_profesional){
+    const url="http://localhost:3000/getCapacitaciones/" + profesional_rut_profesional;
+    return this.http.get(url);
+  }
+
   getAccidentes(){
     const url="http://localhost:3000/getAccidentes";
     return this.http.get(url);
