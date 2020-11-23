@@ -18,6 +18,18 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginProfesionalComponent } from './components/login-profesional/login-profesional.component';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
+import 'bootstrap';
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 @NgModule({
   declarations: [
@@ -36,9 +48,17 @@ import { LoginProfesionalComponent } from './components/login-profesional/login-
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
+    BrowserModule
+
   ],
   providers: [EmpresaService],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

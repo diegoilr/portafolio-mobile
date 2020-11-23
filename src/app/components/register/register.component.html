@@ -1,38 +1,56 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/css/inputmask.min.css" rel="stylesheet"/>
+
+
+<body>
+
+
+  <script src="register.component.js"></script>
 <div class="container h-100 mt-5 mb-5">
   <div class="row h-100 justify-content-center align-items-center">
     <img src="https://cdn.svgporn.com/logos/evergreen-icon.svg" alt="" width="80px">
     <form class="col-12">
       <div class="form-group">
         <label>Rut</label>
-        <input [(ngModel)]="rut_cliente"  name="rut_cliente" type="number" class="form-control" placeholder="12345678-9">
+
+        <input [(ngModel)]="rut_cliente" [dropSpecialCharacters]="false" mask='00.000.000-9' id="rut" name="rut_cliente" type="text" class="form-control" placeholder="12345678-9" required="">
+
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Nombre</label>
-        <input [(ngModel)]="nombre_cliente" name="nombre_cliente" type="text" class="form-control" placeholder="Ej: Manuel">
+        <input [(ngModel)]="nombre_cliente" name="nombre_cliente" type="text" class="form-control clName" placeholder="Ej: Manuel" required="" maxlength="30">
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Apellido</label>
-        <input [(ngModel)]="apellido_cliente" name="apellido_cliente" type="text" class="form-control" placeholder="Ej: Zapata">
+        <input [(ngModel)]="apellido_cliente" name="apellido_cliente" type="text" id="nombre_cliente"class="form-control" placeholder="Ej: Zapata" required="" maxlength="30">
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Teléfono</label>
-        <input [(ngModel)]="tel_cliente" name="tel_cliente" type="text" class="form-control" placeholder="Ej: 9 12345678">
+        <input [(ngModel)]="tel_cliente" [dropSpecialCharacters]="false" prefix="9" mask=" 00000000" name="tel_cliente" type="text" class="form-control" placeholder="Ej: 9 12345678" >
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Nombre de Usuario (se usará para Iniciar Sesión)</label>
-        <input [(ngModel)]="nombre_usuario" name="nombre_usuario" type="text" class="form-control" placeholder="Ej: Usuario...">
+        <input [(ngModel)]="nombre_usuario" name="nombre_usuario" type="text" class="form-control" placeholder="Ej: Usuario..." required="">
       </div>
       <div class="form-group">
         <label for="formGroupExampleInput2">Contraseña</label>
-        <input [(ngModel)]="password_usuario" name="password_usuario" type="password" class="form-control" placeholder="Contraseña...">
+        <input [(ngModel)]="password_usuario" name="password_usuario" type="password" class="form-control" placeholder="Contraseña..." required="">
       </div>
       <div class="input-group">
 
-        <select class="custom-select" [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa">
+        <select class="custom-select" [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa" required="">
           <option *ngFor="let empresa of Empresas" [value]="empresa.id_empresa">{{empresa.nombre_empresa}}</option>
         </select>
       </div>
-      <button (click)="addUsuario()" type="submit" class="mb-5 btn btn-success mt-5">Registrarme</button>
+
+
+     <!--<button (click)="addUsuario()" type="submit" class="mb-5 btn btn-success mt-5">Registrarme</button>-->
+
+     <button (click)="addUsuario()" value="Validar" type="submit" class="mb-5 btn btn-success mt-5 btnAction">Registrarme</button>
+
     </form>
   </div>
 </div>
+</body>

@@ -3,13 +3,13 @@ import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
 import { Router } from "@angular/router";
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./main.css', './util.css']
 })
 export class LoginComponent implements OnInit {
+
 
   constructor(public auth: EmpresaService, public router: Router) { }
 
@@ -39,5 +39,11 @@ export class LoginComponent implements OnInit {
     });
 
   };
+
+  onNavigate(){
+    this.router.navigate(['/register']).then(() => {
+      window.location.reload();
+    });
+}
 
 }
