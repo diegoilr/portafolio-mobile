@@ -11,14 +11,7 @@ import { equal } from 'assert';
 import 'bootstrap';
 import 'bootstrap/js/dist/util';
 import 'bootstrap/js/dist/dropdown';
-import '~ngx-toastr/toastr';
 
-import '~ngx-toastr/toastr-bs4-alert';
-
-import '~bootstrap/scss/functions';
-import '~bootstrap/scss/variables';
-import '~bootstrap/scss/mixins';
-import '~ngx-toastr/toastr-bs4-alert';
 
 
 @Component({
