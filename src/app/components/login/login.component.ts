@@ -1,49 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./main.css', './util.css']
+  styleUrls: ['./main.css', './util.css'],
 })
 export class LoginComponent implements OnInit {
+  constructor(public auth: EmpresaService, public router: Router) {}
 
+  ngOnInit(): void {}
 
-  constructor(public auth: EmpresaService, public router: Router) { }
+  nombre_usuario: string = '';
+  password_usuario: string = '';
 
-  ngOnInit(): void {
+  login() {
+    this.auth
+      .LogIn(this.nombre_usuario, this.password_usuario)
+      .subscribe((res) => {
+        console.log(res);
+        console.log(res['msg']);
+        console.log(res['Datauser']);
+
+        if (res['msg']) {
+          let DataUser: UsuarioInterface = res['Datauser'];
+          this.auth.setCurrentUser(DataUser);
+          this.router.navigate(['/dashboard']).then(() => {
+            window.location.reload();
+          });
+        } else {
+          console.log('Credenciales Incorrectas');
+        }
+      });
   }
 
-  nombre_usuario: string="";
-  password_usuario: string="";
-
-  login(){
-
-    this.auth.LogIn(this.nombre_usuario, this.password_usuario).subscribe((res) => {
-      console.log(res);
-      console.log(res['msg']);
-      console.log(res['Datauser']);
-
-      if(res['msg']){
-        let DataUser: UsuarioInterface = res['Datauser'];
-        this.auth.setCurrentUser(DataUser);
-        this.router.navigate(['/dashboard']).then(() => {
-          window.location.reload();
-        });
-
-      }else {
-        console.log('Credenciales Incorrectas');
-      };
-    });
-
-  };
-
-  onNavigate(){
+  onNavigate() {
     this.router.navigate(['/register']).then(() => {
       window.location.reload();
     });
-}
-
+  }
 }

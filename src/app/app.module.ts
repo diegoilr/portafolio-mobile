@@ -25,11 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 
-import 'bootstrap';
-import 'bootstrap/js/dist/util';
-import 'bootstrap/js/dist/dropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+// import 'bootstrap';
+// import 'bootstrap/js/dist/util';
+// import 'bootstrap/js/dist/dropdown';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
     Page404Component,
     FooterComponent,
     DashboardComponent,
-    LoginProfesionalComponent
+    LoginProfesionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,12 +52,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
-    BrowserModule
-
+    BrowserModule,
   ],
   providers: [EmpresaService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-
-export class AppModule { }
+export class AppModule {}
