@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
             window.location.reload();
           });
         } else {
+
           console.log('Credenciales Incorrectas');
         }
       });
