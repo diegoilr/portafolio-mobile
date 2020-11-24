@@ -2,22 +2,22 @@
 [ FONT ]*/
 
 @font-face {
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   src: url("/../fonts/poppins/Poppins-Regular.ttf");
 }
 
 @font-face {
-  font-family: Poppins-Medium;
+  font-family: Roboto;
   src: url("/../fonts/poppins/Poppins-Medium.ttf");
 }
 
 @font-face {
-  font-family: Montserrat-Medium;
+  font-family: Roboto;
   src: url("/../fonts/montserrat/Montserrat-Medium.ttf");
 }
 
 @font-face {
-  font-family: Montserrat-SemiBold;
+  font-family: Roboto;
   src: url("/../fonts/montserrat/Montserrat-SemiBold.ttf");
 }
 
@@ -33,12 +33,12 @@
 body,
 html {
   height: 100%;
-  font-family: Poppins-Regular, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -70,7 +70,7 @@ h6 {
 }
 
 p {
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
@@ -174,14 +174,14 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Montserrat-SemiBold;
+  font-family: Roboto;
   font-size: 16px;
   color: #555555;
   line-height: 1.5;
 }
 
 .txt2 {
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   font-size: 14px;
   color: #999999;
   line-height: 1.5;
@@ -234,7 +234,7 @@ iframe {
 .login100-form-title {
   width: 100%;
   display: block;
-  font-family: Montserrat-Medium;
+  font-family: Roboto;
   font-size: 39px;
   color: #555555;
   line-height: 1.2;
@@ -245,7 +245,7 @@ iframe {
 [ Button sign in with ]*/
 .btn-face,
 .btn-google {
-  font-family: Montserrat-SemiBold;
+  font-family: Roboto;
   font-size: 18px;
   line-height: 1.2;
 
@@ -341,7 +341,7 @@ iframe {
 
 /*---------------------------------------------*/
 .input100 {
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   color: #333333;
   line-height: 1.2;
   font-size: 18px;
@@ -429,7 +429,7 @@ iframe {
   background-color: #333333;
   border-radius: 10px;
 
-  font-family: Poppins-Medium;
+  font-family: Roboto;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
@@ -492,7 +492,7 @@ iframe {
   right: 12px;
   pointer-events: none;
 
-  font-family: Poppins-Regular;
+  font-family: Roboto;
   color: #c80000;
   font-size: 14px;
   line-height: 1.4;
@@ -509,7 +509,7 @@ iframe {
 
 .alert-validate::after {
   content: "\f12a";
-  font-family: FontAwesome;
+  font-family: Roboto;
   display: block;
   position: absolute;
   color: #c80000;

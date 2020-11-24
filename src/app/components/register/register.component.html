@@ -18,7 +18,7 @@
         <div class="form-group">
 
           <!-- CAMPO DEL RUT-->
-          <label>Rut</label>
+          <label class="txt1">Rut</label>
           <div class="wrap-input100 validate-input" data-validate = "Rut is required">
             <input [(ngModel)]="rut_cliente" [dropSpecialCharacters]="false" mask='00.000.000-9' id="rut" name="rut_cliente" type="text" class="input100" placeholder="12345678-9" required="">
             <span class="focus-input100"></span>
@@ -28,7 +28,7 @@
 
         <!-- CAMPO DEL NOMBRE-->
         <div class="form-group">
-          <label for="formGroupExampleInput2">Nombre</label>
+          <label class="txt1">Nombre</label>
           <div class="wrap-input100 validate-input">
             <input [(ngModel)]="nombre_cliente" name="nombre_cliente" type="text" class="input100" placeholder="Ej: Manuel" required="" maxlength="30">
             <span class="focus-input100"></span>
@@ -39,7 +39,7 @@
         <div class="form-group">
 
 
-          <label label for="formGroupExampleInput2">Apellido</label>
+          <label label class="txt1">Apellido</label>
           <div class="wrap-input100 validate-input">
             <input [(ngModel)]="apellido_cliente" name="apellido_cliente" type="text" id="nombre_cliente"class="input100" placeholder="Ej: Zapata" required="" maxlength="30">
             <span class="focus-input100"></span>
@@ -48,7 +48,7 @@
 
         <!-- CAMPO DEL FONO-->
         <div class="form-group">
-          <label for="formGroupExampleInput2">Teléfono</label>
+          <label class="txt1">Teléfono</label>
           <div class="wrap-input100 validate-input">
             <input [(ngModel)]="tel_cliente" [dropSpecialCharacters]="false" prefix="9" mask=" 00000000" name="tel_cliente" type="text" class="input100" placeholder="Ej: 9 12345678" >
             <span class="focus-input100"></span>
@@ -57,7 +57,7 @@
 
         <!-- cAMPO DEL USUARIO-->
         <div class="form-group">
-          <label for="formGroupExampleInput2">Nombre de Usuario (se usará para Iniciar Sesión)</label>
+          <label class="txt1">Nombre de Usuario (se usará para Iniciar Sesión)</label>
           <div class="wrap-input100 validate-input">
             <input [(ngModel)]="nombre_usuario" name="nombre_usuario" type="text" class="input100" placeholder="Ej: Usuario..." required="">
             <span class="focus-input100"></span>
@@ -66,7 +66,7 @@
 
         <!-- CAMPO DE LA CONTRASEÑA-->
         <div class="form-group">
-          <label for="formGroupExampleInput2">Contraseña</label>
+          <label class="txt1">Contraseña</label>
           <div class="wrap-input100 validate-input">
             <input [(ngModel)]="password_usuario" name="password_usuario" type="password" class="input100" placeholder="Contraseña..." required="">
             <span class="focus-input100"></span>
@@ -75,7 +75,7 @@
 
         <!-- CAMPO DE LA EMPRESA-->
         <div class="input-group">
-          <label for="formGroupExampleInput2">Empresa</label>
+          <label class="txt1">Empresa</label>
           <div class="wrap-input100 validate-input">
           <select class="custom-select" [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa" required="" class="input100">
             <option *ngFor="let empresa of Empresas" [value]="empresa.id_empresa">{{empresa.nombre_empresa}}</option>
