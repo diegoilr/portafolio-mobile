@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { UsuarioInterface } from '../../models/usuario-interface';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./main.css', './util.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(public auth: EmpresaService, public router: Router) {}
+  constructor(public auth: EmpresaService, public router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
   password_usuario: string = '';
 
   login() {
+
+    if(this.validarVacio() == true){
+
     this.auth
       .LogIn(this.nombre_usuario, this.password_usuario)
       .subscribe((res) => {
@@ -35,6 +38,10 @@ export class LoginComponent implements OnInit {
           console.log('Credenciales Incorrectas');
         }
       });
+
+    }else{
+      this.warningToastr();
+    }
   }
 
   onNavigate() {
@@ -42,4 +49,35 @@ export class LoginComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  successToastr() {
+    this.toastr.success('Inicie Sesión', 'Datos Correctos', {
+      timeOut: 3000,
+    });
+  }
+
+  warningToastr() {
+    this.toastr.warning('Ingrese Credenciales Correspondientes', 'Advertencia');
+  }
+  validarVacio() {
+    var validar: boolean;
+
+    var nomUsuario = this.nombre_usuario;
+    var passUsuario = this.password_usuario;
+
+    if (
+      nomUsuario != '' &&
+      passUsuario != ''
+    ) {
+      validar = true;
+    } else {
+      validar = false;
+    }
+
+    return validar;
+  }
+
+
 }
+
+

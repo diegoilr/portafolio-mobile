@@ -15,7 +15,7 @@ import { equal } from 'assert';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./main.css', './util.css'],
 })
 export class RegisterComponent implements OnInit {
   constructor(
