@@ -9,7 +9,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./main.css', './util.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(public auth: EmpresaService, public router: Router, private toastr: ToastrService) {}
+  constructor(
+    public auth: EmpresaService,
+    public router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -17,29 +21,29 @@ export class LoginComponent implements OnInit {
   password_usuario: string = '';
 
   login() {
+    if (this.validarVacio() == true) {
+      this.auth
+        .LogIn(this.nombre_usuario, this.password_usuario)
+        .subscribe((res) => {
+          console.log(res);
+          console.log(res['msg']);
+          console.log(res['Datauser']);
 
-    if(this.validarVacio() == true){
-
-    this.auth
-      .LogIn(this.nombre_usuario, this.password_usuario)
-      .subscribe((res) => {
-        console.log(res);
-        console.log(res['msg']);
-        console.log(res['Datauser']);
-
-        if (res['msg']) {
-          let DataUser: UsuarioInterface = res['Datauser'];
-          this.auth.setCurrentUser(DataUser);
-          this.router.navigate(['/dashboard']).then(() => {
-            window.location.reload();
-          });
-        } else {
-
-          console.log('Credenciales Incorrectas');
-        }
-      });
-
-    }else{
+          if (res['msg']) {
+            let DataUser: UsuarioInterface = res['Datauser'];
+            this.auth.setCurrentUser(DataUser);
+            this.router.navigate(['/dashboard']).then(() => {
+              window.location.reload();
+            });
+          } else {
+            console.log('Credenciales Incorrectas');
+            this.toastr.warning(
+              'Ingrese Credenciales Correspondientes',
+              'Advertencia'
+            );
+          }
+        });
+    } else {
       this.warningToastr();
     }
   }
@@ -65,10 +69,7 @@ export class LoginComponent implements OnInit {
     var nomUsuario = this.nombre_usuario;
     var passUsuario = this.password_usuario;
 
-    if (
-      nomUsuario != '' &&
-      passUsuario != ''
-    ) {
+    if (nomUsuario != '' && passUsuario != '') {
       validar = true;
     } else {
       validar = false;
@@ -76,8 +77,4 @@ export class LoginComponent implements OnInit {
 
     return validar;
   }
-
-
 }
-
-
