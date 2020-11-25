@@ -37,10 +37,7 @@ export class LoginComponent implements OnInit {
             });
           } else {
             console.log('Credenciales Incorrectas');
-            this.toastr.warning(
-              'Ingrese Credenciales Correspondientes',
-              'Advertencia'
-            );
+            this.errorToastr();
           }
         });
     } else {
@@ -60,8 +57,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  errorToastr(){
+    this.toastr.error('Ingrese Credenciales Correctas', 'Advertencia');
+  }
+
+
   warningToastr() {
-    this.toastr.warning('Ingrese Credenciales Correspondientes', 'Advertencia');
+    this.toastr.warning('Ingrese Credenciales en los Campos', 'Advertencia');
   }
   validarVacio() {
     var validar: boolean;
