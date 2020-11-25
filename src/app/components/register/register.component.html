@@ -20,7 +20,9 @@
           <!-- CAMPO DEL RUT-->
           <label class="txt1">Rut</label>
           <div class="wrap-input100 validate-input" data-validate = "Rut is required">
-            <input [(ngModel)]="rut_cliente" [dropSpecialCharacters]="false" mask='00.000.000-9' id="rut" name="rut_cliente" type="text" class="input100" placeholder="12345678-9" required="">
+            <input [(ngModel)]="rut_cliente" id="rut" name="rut_cliente" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type = "number"
+            maxlength = "9" class="input100" placeholder="12345678-9" required="" >
             <span class="focus-input100"></span>
           </div>
         </div>
