@@ -1,0 +1,30 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(32, 32, 32, 0.3);
+  background: #fafafa;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+th {
+  background: #ba68c8;
+  color: #fafafa;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+}
+
+td {
+  font-family: "Open Sans", sans-serif;
+  color: black;
+}
+
+tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
