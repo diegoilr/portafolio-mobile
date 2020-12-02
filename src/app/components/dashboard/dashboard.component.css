@@ -28,3 +28,9 @@ td {
 tr:nth-child(odd) {
   background-color: #eeeeee;
 }
+
+.pantalla {
+  background: rgb(168,34,195);
+  background: linear-gradient(0deg, rgba(168,34,195,1) 0%, rgba(45,205,253,1) 100%);
+}
+

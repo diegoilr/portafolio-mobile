@@ -1,480 +1,482 @@
-<div class="container mt-4" style="padding-top: 3.0rem;">
-  <div class="row mt-2">
-    <h2>Bienvenido, {{consultarNombreCliente()}} ¿Qué deseas hacer?</h2>
-  </div>
+<div class="pantalla" >
+ <div class="container mt-4" style="padding-top: 3.0rem;">
+    <div class="row mt-2">
+      <h2>Bienvenido, {{consultarNombreCliente()}} ¿Qué deseas hacer?</h2>
+    </div>
 
-  <!-- Button trigger modal -->
-  <div class="row">
-    <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn btn-warning" data-toggle="modal" data-target="#agregarAccidente">
-      Agregar Accidente
-    </button>
-    <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn btn-success" data-toggle="modal" (click)="listarAccidente()">
-      Mis Accidentes
-    </button>
-    <button *ngIf="!isAdmin && !isProfesional" class="btn btn-primary" type="button" data-toggle="modal"   data-target="#solicitar">Solicitar Capacitación</button>
-    <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn     btn-secondary"data-toggle="modal" data-target="#capacitacion" (click)="listarCapacitacion()">
-      Mis Capacitaciones Solicitadas
-    </button>
-    <button *ngIf="isAdmin || isProfesional" type="button" class="btn btn-danger" (click)="listarAccidentes()">
-      Registro de Accidentes
-    </button>
+    <!-- Button trigger modal -->
+    <div class="row">
+      <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn btn-warning" data-toggle="modal" data-target="#agregarAccidente">
+        Agregar Accidente
+      </button>
+      <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn btn-success" data-toggle="modal" (click)="listarAccidente()">
+        Mis Accidentes
+      </button>
+      <button *ngIf="!isAdmin && !isProfesional" class="btn btn-primary" type="button" data-toggle="modal"   data-target="#solicitar">Solicitar Capacitación</button>
+      <button *ngIf="!isAdmin && !isProfesional" type="button" class="btn     btn-secondary"data-toggle="modal" data-target="#capacitacion" (click)="listarCapacitacion()">
+        Mis Capacitaciones Solicitadas
+      </button>
+      <button *ngIf="isAdmin || isProfesional" type="button" class="btn btn-danger" (click)="listarAccidentes()">
+        Registro de Accidentes
+      </button>
 
-  </div>
+    </div>
 
-<!-- Modal -->
-<div class="modal fade" id="agregarAccidente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agrega un Accidente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="col-12">
-          <div class="form-group">
-            <label>Descripción del Accidente</label>
-            <textarea [(ngModel)]="descripcion_acc" class="form-control" rows="3" name="descripcion_acc"></textarea>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="agregarAccidente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agrega un Accidente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="col-12">
+            <div class="form-group">
+              <label>Descripción del Accidente</label>
+              <textarea [(ngModel)]="descripcion_acc" class="form-control" rows="3" name="descripcion_acc"></textarea>
+            </div>
 
-          <div class="form-group">
-            <label>Fecha del Accidente</label>
-            <input [(ngModel)]="fecha_accidente" type="date" class="form-control" name="fecha_accidente">
-          </div>
-          <div class="form-group">
-            <label>Rut Cliente</label>
-            <input [(ngModel)]="cliente_rut_cliente" type="text" class="form-control" name="cliente_rut_cliente" placeholder="{{consultarRutUsuario()}}" disabled>
-          </div>
-          <div class="form-group">
-            <label>Nombre de usuario del cliente</label>
-            <input [(ngModel)]="cliente_nombre_usuario" type="text" class="form-control" name="cliente_nombre_usuario" placeholder="{{consultarNombreCliente()}}" disabled>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button (click)="addAccidente()" type="submit" class="btn btn-success">Guardar Accidente</button>
+            <div class="form-group">
+              <label>Fecha del Accidente</label>
+              <input [(ngModel)]="fecha_accidente" type="date" class="form-control" name="fecha_accidente">
+            </div>
+            <div class="form-group">
+              <label>Rut Cliente</label>
+              <input [(ngModel)]="cliente_rut_cliente" type="text" class="form-control" name="cliente_rut_cliente" placeholder="{{consultarRutUsuario()}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Nombre de usuario del cliente</label>
+              <input [(ngModel)]="cliente_nombre_usuario" type="text" class="form-control" name="cliente_nombre_usuario" placeholder="{{consultarNombreCliente()}}" disabled>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button (click)="addAccidente()" type="submit" class="btn btn-success">Guardar Accidente</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class="container mt-3 table-responsive">
-  <p *ngIf="!isAdmin && !isProfesional">Listado de mis Accidentes</p>
-  <p *ngIf="isAdmin || isProfesional">Listado de todos los Accidentes</p>
-  <table class="table table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Descipción</th>
-        <th scope="col">Fecha</th>
-        <th *ngIf="isAdmin || isProfesional" scope="col">Responsable</th>
-        <th *ngIf="isAdmin" scope="col">Acciones</th>
-      </tr>
-    </thead>
+  <div class="container mt-3 table-responsive">
+    <p *ngIf="!isAdmin && !isProfesional">Listado de mis Accidentes</p>
+    <p *ngIf="isAdmin || isProfesional">Listado de todos los Accidentes</p>
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Descipción</th>
+          <th scope="col">Fecha</th>
+          <th *ngIf="isAdmin || isProfesional" scope="col">Responsable</th>
+          <th *ngIf="isAdmin" scope="col">Acciones</th>
+        </tr>
+      </thead>
 
-    <tbody *ngIf="!isAdmin && !isProfesional">
-      <tr *ngFor="let accidente of Accidentes">
-        <th scope="row">{{accidente.id_accidente}}</th>
-        <td>{{accidente.descripcion_acc}}</td>
-        <td>{{accidente.fecha_accidente | date}}</td>
-        <td *ngIf="isAdmin"><button>Eliminar</button></td>
-      </tr>
-    </tbody>
+      <tbody *ngIf="!isAdmin && !isProfesional">
+        <tr *ngFor="let accidente of Accidentes">
+          <th scope="row">{{accidente.id_accidente}}</th>
+          <td>{{accidente.descripcion_acc}}</td>
+          <td>{{accidente.fecha_accidente | date}}</td>
+          <td *ngIf="isAdmin"><button>Eliminar</button></td>
+        </tr>
+      </tbody>
 
 
-    <tbody *ngIf="isAdmin || isProfesional">
-      <tr *ngFor="let accidente2 of Accidentes">
-        <th scope="row">{{accidente2.id_accidente}}</th>
-        <td>{{accidente2.descripcion_acc}}</td>
-        <td>{{accidente2.fecha_accidente | date}}</td>
-        <td>{{accidente2.cliente_nombre_usuario}}</td>
-        <td *ngIf="isAdmin"><button class="btn btn-danger">Eliminar</button></td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody *ngIf="isAdmin || isProfesional">
+        <tr *ngFor="let accidente2 of Accidentes">
+          <th scope="row">{{accidente2.id_accidente}}</th>
+          <td>{{accidente2.descripcion_acc}}</td>
+          <td>{{accidente2.fecha_accidente | date}}</td>
+          <td>{{accidente2.cliente_nombre_usuario}}</td>
+          <td *ngIf="isAdmin"><button class="btn btn-danger">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+        <!-- Modal SOLICITAR-->
+        <div class="modal fade" id="capacitacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mis Solicitudes de Capacitacion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mr-4 ml-4">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let capacitaciones2 of Capacitaciones2">
+                      <th scope="row">{{capacitaciones2.id_capacitacion}}</th>
+                      <td>{{capacitaciones2.fecha_visita | date}}</td>
+                      <td>{{capacitaciones2.desc_capacitacion}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+          </div>
+        </div>
 
       <!-- Modal SOLICITAR-->
-      <div class="modal fade" id="capacitacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="solicitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Mis Solicitudes de Capacitacion</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Solicitando Capacitación</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body mr-4 ml-4">
-            <div class="table-responsive">
-              <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Descripción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let capacitaciones2 of Capacitaciones2">
-                    <th scope="row">{{capacitaciones2.id_capacitacion}}</th>
-                    <td>{{capacitaciones2.fecha_visita | date}}</td>
-                    <td>{{capacitaciones2.desc_capacitacion}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-          </div>
-        </div>
-      </div>
+          <div class="modal-body">
 
-    <!-- Modal SOLICITAR-->
-    <div class="modal fade" id="solicitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Solicitando Capacitación</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+            <form class="col-12">
+              <div class="form-group">
+                <label>Fecha para Agendar</label>
+                <input [(ngModel)]="fecha_visita" name="fecha_visita" class="form-control" type="date">
+              </div>
 
-          <form class="col-12">
-            <div class="form-group">
-              <label>Fecha para Agendar</label>
-              <input [(ngModel)]="fecha_visita" name="fecha_visita" class="form-control" type="date">
-            </div>
+              <div class="form-group">
+                <label>Descripción de la visita</label>
+                <textarea [(ngModel)]="desc_capacitacion" name="desc_capacitacion" class="form-control" rows="3"></textarea>
+              </div>
+            </form>
 
-            <div class="form-group">
-              <label>Descripción de la visita</label>
-              <textarea [(ngModel)]="desc_capacitacion" name="desc_capacitacion" class="form-control" rows="3"></textarea>
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" type="submit" (click)="addCapacitacion()">Solicitar</button>
-        </div>
-        </div>
-      </div>
-    </div>
-
-</div>
-
-</div>
-
-
-
-<!-- GESTION DE USUARIOS -->
-<div *ngIf="isAdmin" class="container">
-  <h2>Gestión de Usuarios</h2>
-  <p>El botón verde te permitirá listar a todos los usuarios registrados en la plataforma, podrás editarlos y eliminarlos. Pero ojo, por temas de seguridad, <strong>no podrás eliminar usuarios que tengan accidentes asociados a su cuenta.</strong> </p>
-  <button class="btn btn-success" (click)="listarUsuarios()">Listar Usuarios</button>
-</div>
-
-<div *ngIf="isAdmin" class="container table-responsive mt-2">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">RUT</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">ID Empresa</th>
-        <th scope="col">Contrato</th>
-        <th scope="col">Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of Usuarios">
-        <th scope="row">{{usuario.rut_cliente}}</th>
-        <td>{{usuario.nombre_cliente}}</td>
-        <td>{{usuario.apellido_cliente}}</td>
-        <td>{{usuario.tel_cliente}}</td>
-        <td>{{usuario.nombre_usuario}}</td>
-        <td>{{usuario.empresa_id_empresa}}</td>
-        <td>{{usuario.tipo_usuario}}</td>
-        <td>
-          <button class="btn btn-warning"  data-toggle="modal" data-target="#actualizarModal" (click)="getDataUser(usuario.rut_cliente,usuario.nombre_cliente, usuario.apellido_cliente, usuario.tel_cliente, usuario.nombre_usuario, usuario.empresa_id_empresa , usuario.tipo_usuario)">
-            Actualizar
-          </button>
-          <button class="btn btn-danger" (click)="deleteUser(usuario.rut_cliente)">
-            Eliminar
-          </button>
-          <button class="btn btn-secondary" data-toggle="modal" data-target="#actualizarPro" (click)="getDataUser(usuario.rut_cliente,usuario.nombre_cliente, usuario.apellido_cliente, usuario.tel_cliente, usuario.nombre_usuario, usuario.empresa_id_empresa , usuario.tipo_usuario)">
-            Profesional
-          </button>
-        </td>
-
-      </tr>
-    </tbody>
-  </table>
-
-    <!-- Modal Actualizar -->
-  <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <form class="col-12">
-            <div class="form-group">
-              <label>Rut</label>
-              <input [(ngModel)]="rut_cliente" name="rut_cliente" class="form-control" type="number" disabled>
-            </div>
-
-            <div class="form-group">
-              <label>Nombre</label>
-              <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-              <label>Apellido</label>
-              <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Teléfono</label>
-              <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" type="number">
-            </div>
-            <div class="form-group">
-              <label>Nombre Usuario</label>
-              <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-              <label>ID Empresa</label>
-              <input [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa" class="form-control" type="number">
-            </div>
-            <div class="form-group">
-              <label>Tipo Usuario</label>
-              <input [(ngModel)]="tipo_usuario" name="tipo_usuario" class="form-control" type="number">
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="updateUser()"  type="submit">Actualizar</button>
-          <button type="button" class="btn btn-primary" (click)="addProfesional()"  type="submit">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ASIGNAR PROFESIONAL -->
-  <div class="modal fade" id="actualizarPro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <form class="col-12">
-            <div class="form-group">
-              <label>Rut</label>
-              <input [(ngModel)]="rut_cliente" name="rut_cliente" class="form-control" type="number" disabled>
-            </div>
-
-            <div class="form-group">
-              <label>Nombre</label>
-              <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text" disabled>
-            </div>
-            <div class="form-group" disabled>
-              <label>Apellido</label>
-              <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control" disabled>
-            </div>
-            <div class="form-group">
-              <label>Teléfono</label>
-              <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" type="number" disabled>
-            </div>
-            <div class="form-group">
-              <label>Nombre Usuario</label>
-              <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text" disabled>
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="addProfesional()" (click)="updatePro()" type="submit">Convertir</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ASIGNAR PROFESIONAL -->
-
-</div>
-<!-- GESTION DE USUARIOS -->
-
-
-<!-- CAPACITACIONES -->
-<div *ngIf="isAdmin || isProfesional" class="container">
-  <h2>Gestión de Capacitaciones</h2>
-  <button class="btn btn-warning" (click)="listarCapacitaciones()">Listar Capacitaciones</button>
-</div>
-
-<div *ngIf="isAdmin || isProfesional" class="container table-responsive mt-2">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Fecha Visita</th>
-        <th scope="col">Descripción Solicitud</th>
-        <th scope="col">ID Empresa Cliente</th>
-        <th scope="col">Nombre de Usuario Cliente</th>
-        <th scope="col">Rut Cliente</th>
-        <th scope="col">Rut Profesional</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let capacitaciones of Capacitaciones">
-        <th scope="row">{{capacitaciones.id_capacitacion}}</th>
-        <td>{{capacitaciones.fecha_visita | date}}</td>
-        <td>{{capacitaciones.desc_capacitacion}}</td>
-        <td>{{capacitaciones.empresa_id_empresa}}</td>
-        <td>{{capacitaciones.cliente_nombre_usuario}}</td>
-        <td>{{capacitaciones.cliente_rut_cliente}}</td>
-        <td>{{capacitaciones.profesional_rut_profesional}}</td>
-        <td>
-          <button *ngIf="isAdmin" class="btn btn-warning" (click)="listarProfesionales()" (click)="getDataCapacitacion(capacitaciones.id_capacitacion, capacitaciones.fecha_visita, capacitaciones.desc_capacitacion, capacitaciones.empresa_id_empresa, capacitaciones.cliente_nombre_usuario, capacitaciones.cliente_rut_cliente, capacitaciones.profesional_rut_profesional)"  data-toggle="modal" data-target="#actualizarCapacitacion">
-            Actualizar
-          </button>
-          <button *ngIf="isAdmin" class="btn btn-danger">
-            Eliminar
-          </button>
-          <button *ngIf="isProfesional && !isAdmin" class="btn btn-success">
-            Asignar
-          </button>
-        </td>
-
-      </tr>
-    </tbody>
-  </table>
-
-    <!-- Modal Actualizar -->
-  <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <form class="col-12">
-            <div class="form-group">
-              <label>Rut</label>
-              <input name="rut_cliente" class="form-control" type="number" disabled>
-            </div>
-
-            <div class="form-group">
-              <label>Nombre</label>
-              <input name="nombre_cliente" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-              <label>Apellido</label>
-              <input name="apellido_cliente" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Teléfono</label>
-              <input name="tel_cliente" class="form-control" type="number">
-            </div>
-            <div class="form-group">
-              <label>Nombre Usuario</label>
-              <input name="nombre_usuario" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-              <label>ID Empresa</label>
-              <input name="empresa_id_empresa" class="form-control" type="number">
-            </div>
-            <div class="form-group">
-              <label>Tipo Usuario</label>
-              <input name="tipo_usuario" class="form-control" type="number">
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" type="submit">Actualizar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- CAPACITACIONES -->
-
-<!-- Modal Actualizar Capacitacion -->
-<div class="modal fade" id="actualizarCapacitacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Actualizando Capacitacion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="col-12">
-          <div class="form-group">
-            <label>ID Capacitacion</label>
-            <input [(ngModel)]="id_capacitacion"  name="id_capacitacion" type="number" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Fecha de la visita</label>
-            <input [(ngModel)]="fecha_visita"  name="fecha_visita" type="date" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Descripción</label>
-            <textarea [(ngModel)]="desc_capacitacion" class="form-control" rows="3" name="desc_capacitacion"></textarea>
-          </div>
-          <div class="input-group">
-            <label>Profesional a Asignar: </label>
-            <select class="custom-select" [(ngModel)]="profesional_rut_profesional" name="profesional_rut_profesional">
-              <option *ngFor="let prof of Profesionales" [value]="prof.rut_cliente">{{prof.nombre_usuario}}</option>
-            </select>
-            {{profesional_rut_profesional}}
-          </div>
-          <div class="form-group">
-            <label>ID Empresa</label>
-            <input [(ngModel)]="empresa_id_empresa"  name="empresa_id_empresa" type="number" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Nombre Usuario</label>
-            <input [(ngModel)]="cliente_nombre_usuario"  name="cliente_nombre_usuario" type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Rut Cliente</label>
-            <input [(ngModel)]="cliente_rut_cliente"  name="cliente_rut_cliente" type="number" class="form-control">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="updateCapacitacion()">Actualizar</button>
+            <button type="button" class="btn btn-primary" type="submit" (click)="addCapacitacion()">Solicitar</button>
           </div>
-        </form>
+          </div>
+        </div>
+      </div>
 
+  </div>
+
+  </div>
+
+
+
+  <!-- GESTION DE USUARIOS -->
+  <div *ngIf="isAdmin" class="container">
+    <h2>Gestión de Usuarios</h2>
+    <p>El botón verde te permitirá listar a todos los usuarios registrados en la plataforma, podrás editarlos y eliminarlos. Pero ojo, por temas de seguridad, <strong>no podrás eliminar usuarios que tengan accidentes asociados a su cuenta.</strong> </p>
+    <button class="btn btn-success" (click)="listarUsuarios()">Listar Usuarios</button>
+  </div>
+
+  <div *ngIf="isAdmin" class="container table-responsive mt-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">RUT</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">ID Empresa</th>
+          <th scope="col">Contrato</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of Usuarios">
+          <th scope="row">{{usuario.rut_cliente}}</th>
+          <td>{{usuario.nombre_cliente}}</td>
+          <td>{{usuario.apellido_cliente}}</td>
+          <td>{{usuario.tel_cliente}}</td>
+          <td>{{usuario.nombre_usuario}}</td>
+          <td>{{usuario.empresa_id_empresa}}</td>
+          <td>{{usuario.tipo_usuario}}</td>
+          <td>
+            <button class="btn btn-warning"  data-toggle="modal" data-target="#actualizarModal" (click)="getDataUser(usuario.rut_cliente,usuario.nombre_cliente, usuario.apellido_cliente, usuario.tel_cliente, usuario.nombre_usuario, usuario.empresa_id_empresa , usuario.tipo_usuario)">
+              Actualizar
+            </button>
+            <button class="btn btn-danger" (click)="deleteUser(usuario.rut_cliente)">
+              Eliminar
+            </button>
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#actualizarPro" (click)="getDataUser(usuario.rut_cliente,usuario.nombre_cliente, usuario.apellido_cliente, usuario.tel_cliente, usuario.nombre_usuario, usuario.empresa_id_empresa , usuario.tipo_usuario)">
+              Profesional
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+      <!-- Modal Actualizar -->
+    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form class="col-12">
+              <div class="form-group">
+                <label>Rut</label>
+                <input [(ngModel)]="rut_cliente" name="rut_cliente" class="form-control" type="number" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Nombre</label>
+                <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Teléfono</label>
+                <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" type="number">
+              </div>
+              <div class="form-group">
+                <label>Nombre Usuario</label>
+                <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label>ID Empresa</label>
+                <input [(ngModel)]="empresa_id_empresa" name="empresa_id_empresa" class="form-control" type="number">
+              </div>
+              <div class="form-group">
+                <label>Tipo Usuario</label>
+                <input [(ngModel)]="tipo_usuario" name="tipo_usuario" class="form-control" type="number">
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="updateUser()"  type="submit">Actualizar</button>
+            <button type="button" class="btn btn-primary" (click)="addProfesional()"  type="submit">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASIGNAR PROFESIONAL -->
+    <div class="modal fade" id="actualizarPro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form class="col-12">
+              <div class="form-group">
+                <label>Rut</label>
+                <input [(ngModel)]="rut_cliente" name="rut_cliente" class="form-control" type="number" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Nombre</label>
+                <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text" disabled>
+              </div>
+              <div class="form-group" disabled>
+                <label>Apellido</label>
+                <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control" disabled>
+              </div>
+              <div class="form-group">
+                <label>Teléfono</label>
+                <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" type="number" disabled>
+              </div>
+              <div class="form-group">
+                <label>Nombre Usuario</label>
+                <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text" disabled>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="addProfesional()" (click)="updatePro()" type="submit">Convertir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ASIGNAR PROFESIONAL -->
+
+  </div>
+  <!-- GESTION DE USUARIOS -->
+
+
+  <!-- CAPACITACIONES -->
+  <div *ngIf="isAdmin || isProfesional" class="container">
+    <h2>Gestión de Capacitaciones</h2>
+    <button class="btn btn-warning" (click)="listarCapacitaciones()">Listar Capacitaciones</button>
+  </div>
+
+  <div *ngIf="isAdmin || isProfesional" class="container table-responsive mt-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Fecha Visita</th>
+          <th scope="col">Descripción Solicitud</th>
+          <th scope="col">ID Empresa Cliente</th>
+          <th scope="col">Nombre de Usuario Cliente</th>
+          <th scope="col">Rut Cliente</th>
+          <th scope="col">Rut Profesional</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let capacitaciones of Capacitaciones">
+          <th scope="row">{{capacitaciones.id_capacitacion}}</th>
+          <td>{{capacitaciones.fecha_visita | date}}</td>
+          <td>{{capacitaciones.desc_capacitacion}}</td>
+          <td>{{capacitaciones.empresa_id_empresa}}</td>
+          <td>{{capacitaciones.cliente_nombre_usuario}}</td>
+          <td>{{capacitaciones.cliente_rut_cliente}}</td>
+          <td>{{capacitaciones.profesional_rut_profesional}}</td>
+          <td>
+            <button *ngIf="isAdmin" class="btn btn-warning" (click)="listarProfesionales()" (click)="getDataCapacitacion(capacitaciones.id_capacitacion, capacitaciones.fecha_visita, capacitaciones.desc_capacitacion, capacitaciones.empresa_id_empresa, capacitaciones.cliente_nombre_usuario, capacitaciones.cliente_rut_cliente, capacitaciones.profesional_rut_profesional)"  data-toggle="modal" data-target="#actualizarCapacitacion">
+              Actualizar
+            </button>
+            <button *ngIf="isAdmin" class="btn btn-danger">
+              Eliminar
+            </button>
+            <button *ngIf="isProfesional && !isAdmin" class="btn btn-success">
+              Asignar
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+      <!-- Modal Actualizar -->
+    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Actualizando Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form class="col-12">
+              <div class="form-group">
+                <label>Rut</label>
+                <input name="rut_cliente" class="form-control" type="number" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Nombre</label>
+                <input name="nombre_cliente" class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label>Apellido</label>
+                <input name="apellido_cliente" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Teléfono</label>
+                <input name="tel_cliente" class="form-control" type="number">
+              </div>
+              <div class="form-group">
+                <label>Nombre Usuario</label>
+                <input name="nombre_usuario" class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label>ID Empresa</label>
+                <input name="empresa_id_empresa" class="form-control" type="number">
+              </div>
+              <div class="form-group">
+                <label>Tipo Usuario</label>
+                <input name="tipo_usuario" class="form-control" type="number">
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" type="submit">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CAPACITACIONES -->
+
+  <!-- Modal Actualizar Capacitacion -->
+  <div class="modal fade" id="actualizarCapacitacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Actualizando Capacitacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="col-12">
+            <div class="form-group">
+              <label>ID Capacitacion</label>
+              <input [(ngModel)]="id_capacitacion"  name="id_capacitacion" type="number" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Fecha de la visita</label>
+              <input [(ngModel)]="fecha_visita"  name="fecha_visita" type="date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea [(ngModel)]="desc_capacitacion" class="form-control" rows="3" name="desc_capacitacion"></textarea>
+            </div>
+            <div class="input-group">
+              <label>Profesional a Asignar: </label>
+              <select class="custom-select" [(ngModel)]="profesional_rut_profesional" name="profesional_rut_profesional">
+                <option *ngFor="let prof of Profesionales" [value]="prof.rut_cliente">{{prof.nombre_usuario}}</option>
+              </select>
+              {{profesional_rut_profesional}}
+            </div>
+            <div class="form-group">
+              <label>ID Empresa</label>
+              <input [(ngModel)]="empresa_id_empresa"  name="empresa_id_empresa" type="number" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Nombre Usuario</label>
+              <input [(ngModel)]="cliente_nombre_usuario"  name="cliente_nombre_usuario" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Rut Cliente</label>
+              <input [(ngModel)]="cliente_rut_cliente"  name="cliente_rut_cliente" type="number" class="form-control">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="updateCapacitacion()">Actualizar</button>
+            </div>
+          </form>
+
+        </div>
       </div>
     </div>
   </div>
+  <!-- Modal Actualizar Capacitacion-->
 </div>
-<!-- Modal Actualizar Capacitacion-->

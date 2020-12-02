@@ -12,6 +12,8 @@ import { of } from 'rxjs';
 import { AccidentesInterface } from 'src/app/models/accidentes-interface';
 import { ProfesionalInterface } from '../../models/profesional-interface';
 
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,12 +22,19 @@ import { ProfesionalInterface } from '../../models/profesional-interface';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public crudService: EmpresaService, private router: Router) { }
+  constructor(public crudService: EmpresaService, private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.checkAdmin();
 
+
+
   }
+
+
+
+
 
   id_accidente: number;
   id_capacitacion: number;
@@ -106,9 +115,28 @@ export class DashboardComponent implements OnInit {
 
 
   addAccidente(){
-    this.crudService.insertAccidente(this.descripcion_acc, this.fecha_accidente, this.consultarRutUsuario(), this.consultarNombreUsuario()).subscribe((res:AccidenteInterface)=>{
-      window.location.reload();
-    })
+
+
+    if(this.descripcion_acc == undefined || this.fecha_accidente == undefined){
+
+      this.toastr.warning("Rellene los datos correspondientes","Campos Vacios");
+
+    }else{
+      if(this.descripcion_acc == "" || this.fecha_accidente.toString() == ""){
+        this.toastr.warning("Rellene los datos correspondientes","Campos Vacios");
+      }else{
+        console.log("aqui")
+        this.crudService.insertAccidente(this.descripcion_acc, this.fecha_accidente, this.consultarRutUsuario(), this.consultarNombreUsuario()).subscribe((res:AccidenteInterface)=>{
+          window.location.reload();
+          this.toastr.success("Los Datos Han Sido Guardados","Datos Guardados");
+
+        })
+      }
+    }
+
+
+
+
   }
 
   listarAccidente(){
@@ -159,13 +187,27 @@ export class DashboardComponent implements OnInit {
       this.Usuarios = res;
       window.location.reload();
     })
+    this.toastr.success("Los datos han sido actualizados","Datos Actualizados");
   }
 
   addCapacitacion(){
-    this.crudService.insertCapacitacion(this.fecha_visita, this.desc_capacitacion, this.consultarIdEmpresa(), this.consultarNombreUsuario(), this.consultarRutUsuario() ).subscribe((res:CapacitacionInterface[])=>{
-      this.Capacitacion = res;
-      window.location.reload();
-    })
+
+    if(this.fecha_visita == undefined || this.desc_capacitacion == undefined){
+      this.toastr.warning("Rellene los datos correspondientes","Campos Vacios");
+    }else{
+      if(this.fecha_visita.toString() == "" || this.desc_capacitacion == ""){
+        this.toastr.warning("Rellene los datos correspondientes","Campos Vacios");
+      }else{
+
+        this.crudService.insertCapacitacion(this.fecha_visita, this.desc_capacitacion, this.consultarIdEmpresa(), this.consultarNombreUsuario(), this.consultarRutUsuario() ).subscribe((res:CapacitacionInterface[])=>{
+          this.Capacitacion = res;
+          window.location.reload();
+        });
+        this.toastr.success("Los Datos Han Sido Guardados","Datos Guardados")
+      }
+    }
+
+
   }
 
   listarCapacitaciones(){
@@ -193,6 +235,8 @@ export class DashboardComponent implements OnInit {
       this.Capacitaciones2 = res;
       window.location.reload();
     })
+
+    this.toastr.success("Capacitación actualizada","Actualización de Capacitación")
   }
 
   addProfesional(){
@@ -200,9 +244,13 @@ export class DashboardComponent implements OnInit {
       this.Profesionales = res;
       window.location.reload();
     })
+
+    this.toastr.success("Profesional Asignado","Asignación Profesional")
   }
 
   deleteUser(rut_cliente){
+
+    this.toastr.error("Los datos han sido eliminados","Datos Eliminados")
     this.crudService.DeleteUser(rut_cliente).subscribe((res:UsuarioInterface[])=>{
       this.Usuarios = res;
       window.location.reload();
@@ -210,6 +258,8 @@ export class DashboardComponent implements OnInit {
   }
 
   updatePro(rut_cliente){
+
+
     this.crudService.updatePro(this.rut_cliente).subscribe((res:UsuarioInterface[])=>{
       this.Usuarios = res;
     })
