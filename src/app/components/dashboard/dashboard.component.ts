@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
 
   consultarRutUsuario() {
     const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
+    console.log(dataUsuario);
     return dataUsuario.rut_cliente;
   }
 
@@ -200,7 +201,7 @@ export class DashboardComponent implements OnInit {
     this.desc_capacitacion = desc_capacitacion;
     this.empresa_id_empresa = empresa_id_empresa;
     this.cliente_nombre_usuario = cliente_nombre_usuario;
-    this.cliente_rut_cliente = cliente_rut_cliente;
+    this.cliente_rut_cliente = this.consultarRutUsuario();
   }
 
   updateUser() {
@@ -307,6 +308,15 @@ export class DashboardComponent implements OnInit {
       'Capacitación actualizada',
       'Actualización de Capacitación'
     );
+  }
+
+  asignarCapacitacion() {
+    this.crudService
+      .asignarCapacitacion(this.id_capacitacion, this.cliente_rut_cliente)
+      .subscribe((res: CapacitacionesInterface[]) => {
+        this.Capacitaciones2 = res;
+        window.location.reload();
+      });
   }
 
   addProfesional() {

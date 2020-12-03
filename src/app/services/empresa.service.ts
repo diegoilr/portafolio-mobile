@@ -324,4 +324,21 @@ export class EmpresaService {
       )
       .pipe(map((data) => data));
   }
+
+  asignarCapacitacion(
+    id_capacitacion: number,
+    profesional_rut_profesional: number
+  ) {
+    const url = 'http://localhost:3000/asignarCapacitacion';
+    return this.http
+      .put(
+        url,
+        {
+          id_capacitacion: id_capacitacion,
+          profesional_rut_profesional: profesional_rut_profesional,
+        },
+        { headers: this.headers }
+      )
+      .pipe(map((data) => data));
+  }
 }

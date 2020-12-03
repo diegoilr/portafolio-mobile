@@ -508,7 +508,7 @@
             <td>{{capacitaciones.cliente_nombre_usuario}}</td>
             <td>{{capacitaciones.cliente_rut_cliente}}</td>
             <td>
-              <button *ngIf="isProfesional && !isAdmin" class="btn btn-success">
+              <button *ngIf="isProfesional && !isAdmin" class="btn btn-success" data-toggle="modal" data-target="#asignarCapa" (click)="getDataCapacitacion(capacitaciones.id_capacitacion, capacitaciones.cliente_rut_cliente)">
                 Asignar
               </button>
             </td>
@@ -517,6 +517,36 @@
         </tbody>
       </table>
 
+    </div>
+
+    <div class="modal fade" id="asignarCapa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Asignando Capacitacion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="col-12">
+              <div class="form-group">
+                <label>ID Capacitacion</label>
+                <input [(ngModel)]="id_capacitacion"  name="id_capacitacion" type="number" class="form-control" disabled>
+              </div>
+              <div class="form-group">
+                <label>Rut Profesional Asignado</label>
+                <input [(ngModel)]="cliente_rut_cliente"  name="cliente_rut_cliente" type="number" class="form-control" disabled>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" (click)="asignarCapacitacion()">Asignar</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CAPACITACIONES QUE VEN PROFESIONALES-->
