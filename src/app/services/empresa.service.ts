@@ -194,13 +194,13 @@ export class EmpresaService {
       .pipe(map((data) => data));
   }
 
-  //TODO: gerAccidente por nombre de Usuario
+  //TODO: getAccidente por nombre de Usuario
   GetAccidentesByUser(cliente_nombre_usuario) {
     const url = 'http://localhost:3000/getAccidente/' + cliente_nombre_usuario;
     return this.http.get(url);
   }
 
-  //TODO: gerAccidente por profesional
+  //TODO: getAccidente por profesional
   GetAccidentesByProfesional(profesional_rut_profesional) {
     const url =
       'http://localhost:3000/getCapacitaciones/' + profesional_rut_profesional;
@@ -279,9 +279,22 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
+  getCapacitacionesByProfesional(profesional_rut_profesional) {
+    const url =
+      'http://localhost:3000/getCapacitaciones/' + profesional_rut_profesional;
+    return this.http.get(url);
+  }
+
   getCapacitacionesByUser(cliente_nombre_usuario) {
     const url =
       'http://localhost:3000/getCapacitacion/' + cliente_nombre_usuario;
+    return this.http.get(url);
+  }
+
+  getCapacitacionesNoAsignadas(profesional_rut_profesional) {
+    const url =
+      'http://localhost:3000/getCapacitacionesNoAsignadas/' +
+      profesional_rut_profesional;
     return this.http.get(url);
   }
 

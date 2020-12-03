@@ -324,12 +324,12 @@
 
 
   <!-- CAPACITACIONES -->
-  <div *ngIf="isAdmin || isProfesional" class="container">
+  <div *ngIf="isAdmin" class="container">
     <h2>Gestión de Capacitaciones</h2>
     <button class="btn btn-warning" (click)="listarCapacitaciones()">Listar Capacitaciones</button>
   </div>
 
-  <div *ngIf="isAdmin || isProfesional" class="container table-responsive mt-2">
+  <div *ngIf="isAdmin" class="container table-responsive mt-2">
     <table class="table">
       <thead>
         <tr>
@@ -479,4 +479,80 @@
     </div>
   </div>
   <!-- Modal Actualizar Capacitacion-->
+
+    <!-- CAPACITACIONES QUE VEN PROFESIONALES-->
+    <div *ngIf="isProfesional" class="container">
+      <h2>Lista de Capacitaciones sin Asignar</h2>
+      <button class="btn btn-warning" (click)="capNoAsignadas()">Listar Capacitaciones</button>
+    </div>
+
+    <div *ngIf="isProfesional" class="container table-responsive mt-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha Visita</th>
+            <th scope="col">Descripción Solicitud</th>
+            <th scope="col">ID Empresa Cliente</th>
+            <th scope="col">Nombre de Usuario Cliente</th>
+            <th scope="col">Rut Cliente</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let capacitaciones of Capacitaciones">
+            <th scope="row">{{capacitaciones.id_capacitacion}}</th>
+            <td>{{capacitaciones.fecha_visita | date}}</td>
+            <td>{{capacitaciones.desc_capacitacion}}</td>
+            <td>{{capacitaciones.empresa_id_empresa}}</td>
+            <td>{{capacitaciones.cliente_nombre_usuario}}</td>
+            <td>{{capacitaciones.cliente_rut_cliente}}</td>
+            <td>
+              <button *ngIf="isProfesional && !isAdmin" class="btn btn-success">
+                Asignar
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- CAPACITACIONES QUE VEN PROFESIONALES-->
+
+  <!-- MIS CAPACITACIONES -->
+  <div *ngIf="isProfesional" class="container">
+      <h2>Mis Capacitaciones Asignadas</h2>
+      <button class="btn btn-warning" (click)="listarCapacitacionPorProfesional()">Listar Mis Capacitaciones</button>
+  </div>
+
+  <div *ngIf="isProfesional" class="container table-responsive mt-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha Visita</th>
+            <th scope="col">Descripción Solicitud</th>
+            <th scope="col">ID Empresa Cliente</th>
+            <th scope="col">Nombre de Usuario Cliente</th>
+            <th scope="col">Rut Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let capacitaciones of Capacitaciones2">
+            <th scope="row">{{capacitaciones.id_capacitacion}}</th>
+            <td>{{capacitaciones.fecha_visita | date}}</td>
+            <td>{{capacitaciones.desc_capacitacion}}</td>
+            <td>{{capacitaciones.empresa_id_empresa}}</td>
+            <td>{{capacitaciones.cliente_nombre_usuario}}</td>
+            <td>{{capacitaciones.cliente_rut_cliente}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+  <!-- MIS CAPACITACIONES -->
+
 </div>
