@@ -279,9 +279,8 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
-  getCapacitacionesByProfesional(profesional_rut_profesional) {
-    const url =
-      'http://localhost:3000/getCapacitaciones/' + profesional_rut_profesional;
+  getCapacitacionesByProfesional(rut_cliente) {
+    const url = 'http://localhost:3000/getCapacitaciones/' + rut_cliente;
     return this.http.get(url);
   }
 
