@@ -36,7 +36,7 @@
           <form class="col-12">
             <div class="form-group">
               <label>Descripción del Accidente</label>
-              <textarea [(ngModel)]="descripcion_acc" class="form-control" rows="3" name="descripcion_acc"></textarea>
+              <textarea [(ngModel)]="descripcion_acc" class="form-control" rows="3" name="descripcion_acc" required=""  maxlength="150"></textarea>
             </div>
 
             <div class="form-group">
@@ -154,7 +154,7 @@
 
               <div class="form-group">
                 <label>Descripción de la visita</label>
-                <textarea [(ngModel)]="desc_capacitacion" name="desc_capacitacion" class="form-control" rows="3"></textarea>
+                <textarea [(ngModel)]="desc_capacitacion" name="desc_capacitacion" class="form-control" rows="3" required="" maxlength="150"></textarea>
               </div>
             </form>
 
@@ -239,19 +239,19 @@
 
               <div class="form-group">
                 <label>Nombre</label>
-                <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text">
+                <input [(ngModel)]="nombre_cliente" name="nombre_cliente" class="form-control" type="text" maxlength="30">
               </div>
               <div class="form-group">
                 <label>Apellido</label>
-                <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control">
+                <input [(ngModel)]="apellido_cliente" name="apellido_cliente" class="form-control" maxlength="30">
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
-                <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" type="number">
+                <input [(ngModel)]="tel_cliente" name="tel_cliente" class="form-control" mask="000000000" type="text" maxlength="9">
               </div>
               <div class="form-group">
                 <label>Nombre Usuario</label>
-                <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text">
+                <input [(ngModel)]="nombre_usuario" name="nombre_usuario" class="form-control" type="text" maxlength="15">
               </div>
               <div class="form-group">
                 <label>ID Empresa</label>
@@ -387,19 +387,19 @@
 
               <div class="form-group">
                 <label>Nombre</label>
-                <input name="nombre_cliente" class="form-control" type="text">
+                <input name="nombre_cliente" class="form-control" type="text" maxlength="30">
               </div>
               <div class="form-group">
                 <label>Apellido</label>
-                <input name="apellido_cliente" class="form-control">
+                <input name="apellido_cliente" class="form-control" maxlength="30">
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
-                <input name="tel_cliente" class="form-control" type="number">
+                <input name="tel_cliente" class="form-control" type="text" mask="000000000" maxlength="9">
               </div>
               <div class="form-group">
                 <label>Nombre Usuario</label>
-                <input name="nombre_usuario" class="form-control" type="text">
+                <input name="nombre_usuario" class="form-control" type="text" maxlength="15">
               </div>
               <div class="form-group">
                 <label>ID Empresa</label>
@@ -446,7 +446,7 @@
             </div>
             <div class="form-group">
               <label>Descripción</label>
-              <textarea [(ngModel)]="desc_capacitacion" class="form-control" rows="3" name="desc_capacitacion"></textarea>
+              <textarea [(ngModel)]="desc_capacitacion" class="form-control" rows="3" name="desc_capacitacion" maxlength="150"></textarea>
             </div>
             <div class="input-group">
               <label>Profesional a Asignar: </label>
@@ -461,7 +461,7 @@
             </div>
             <div class="form-group">
               <label>Nombre Usuario</label>
-              <input [(ngModel)]="cliente_nombre_usuario"  name="cliente_nombre_usuario" type="text" class="form-control">
+              <input [(ngModel)]="cliente_nombre_usuario"  name="cliente_nombre_usuario" type="text" class="form-control" maxlength="30">
             </div>
             <div class="form-group">
               <label>Rut Cliente</label>
