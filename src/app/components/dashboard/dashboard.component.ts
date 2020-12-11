@@ -1,5 +1,6 @@
+import { map } from 'rxjs/operators';
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpresaInterface } from 'src/app/models/empresa-interface';
 import { AccidenteInterface } from '../../models/accidente-interface';
@@ -13,7 +14,17 @@ import { AccidentesInterface } from 'src/app/models/accidentes-interface';
 import { ProfesionalInterface } from '../../models/profesional-interface';
 
 import { ToastrService } from 'ngx-toastr';
+import { Chart, ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
 
+interface jsPDFWithPlugin extends jsPDF {
+  autoTable: any;
+  autotable: (options: UserOptions) => jsPDF;
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -26,8 +37,13 @@ export class DashboardComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  chart: any;
+
   ngOnInit() {
     this.checkAdmin();
+    this.crudService.getStatsAccidentes().subscribe((res) => {
+      console.log(res);
+    });
   }
 
   id_accidente: number;
@@ -62,6 +78,95 @@ export class DashboardComponent implements OnInit {
   fecha_visita: Date;
   desc_capacitacion: string;
 
+  downloadPdfCapacitacionesAdmin() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#capAdmin',
+    });
+
+    doc.save('Capacitaciones_Totales.pdf');
+  }
+
+  downloadPdfUsersAdmin() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#allUsers',
+    });
+
+    doc.save('Usuarios_Totales.pdf');
+  }
+
+  downloadPdfAccidentesAdmin() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#allAccidentes',
+    });
+
+    doc.save('Accidentes_Totales.pdf');
+  }
+
+  downloadPdfCapacitacionesUser() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#userCapacitaciones',
+    });
+
+    doc.save('Mis Capacitaciones.pdf');
+  }
+
+  downloadPdfMisAccidentesUser() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#userAccidentes',
+    });
+
+    doc.save('Mis Accidentes.pdf');
+  }
+
+  downloadPdfCapacitacionesAsignadasProfesional() {
+    const doc = new jsPDF() as jsPDFWithPlugin;
+    doc.autoTable({
+      html: '#capAsignadas',
+    });
+
+    doc.save('Mis Capacitaciones.pdf');
+  }
+
+  mostrarBtn() {
+    let btn = document.getElementById('demo');
+    if (btn.style.display === 'none') {
+      btn.style.display = 'block';
+    }
+  }
+
+  mostrarBtnPdfUsers() {
+    let btn2 = document.getElementById('demo2');
+    if (btn2.style.display === 'none') {
+      btn2.style.display = 'block';
+    }
+  }
+
+  mostrarBtnPdfAccidentes() {
+    let btn = document.getElementById('demo3');
+    if (btn.style.display === 'none') {
+      btn.style.display = 'block';
+    }
+  }
+
+  mostrarBtnPdfMisAccidentesUser() {
+    let btn = document.getElementById('demo4');
+    if (btn.style.display === 'none') {
+      btn.style.display = 'block';
+    }
+  }
+
+  mostrarBtnPdfCCapacitacionesAsignadas() {
+    let btn = document.getElementById('demo5');
+    if (btn.style.display === 'none') {
+      btn.style.display = 'block';
+    }
+  }
+
   consultarNombreUsuario() {
     const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
     return dataUsuario.nombre_usuario;
@@ -69,7 +174,7 @@ export class DashboardComponent implements OnInit {
 
   consultarRutUsuario() {
     const dataUsuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
-    console.log(dataUsuario);
+    //console.log(dataUsuario);
     return dataUsuario.rut_cliente;
   }
 
@@ -337,7 +442,10 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteUser(rut_cliente) {
-    this.toastr.error('Los datos han sido eliminados', 'Datos Eliminados');
+    this.toastr.error(
+      'No se puede borrar el usuario, debido a que tiene accidentes asociados',
+      'Error'
+    );
     this.crudService
       .DeleteUser(rut_cliente)
       .subscribe((res: UsuarioInterface[]) => {

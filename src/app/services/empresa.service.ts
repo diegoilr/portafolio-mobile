@@ -212,6 +212,13 @@ export class EmpresaService {
     return this.http.get(url);
   }
 
+  getStatsAccidentes() {
+    const url = 'http://localhost:3000/getAccidentes';
+    return this.http
+      .get('http://localhost:3000/getAccidentes')
+      .pipe(map((result) => result));
+  }
+
   getUsers() {
     const url = 'http://localhost:3000/getUsers';
     return this.http.get(url);

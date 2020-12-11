@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
 
 // import 'bootstrap';
 // import 'bootstrap/js/dist/util';
@@ -53,6 +54,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     BrowserModule,
+    ChartsModule,
   ],
   providers: [EmpresaService],
   bootstrap: [AppComponent],
